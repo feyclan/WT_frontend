@@ -1,1 +1,22 @@
-<p>book-form works!</p>
+<div class="container">
+<div class="row justify-content-center">
+  <div class="col-5">
+  <p>Add Book</p>
+  <form [formGroup]="bookForm" (ngSubmit)="onSubmit()">
+    <div class="mb-3">
+      <label for="bookTitle">Title</label><br>
+      <input formControlName="title" class="form-control" type="text" id="bookTitle" placeholder="Enter Title">
+    </div>
+    <div class="mb-3">
+      <label for="bookAuthor">Author</label><br>
+      <input formControlName="author" class="form-control" type="text" id="bookAuthor" placeholder="Enter Author">
+    </div>
+    <div class="mb-3">
+      <label for="bookAuthor">Description</label><br>
+      <textarea formControlName="description" class="form-control" type="text" id="bookDesc" placeholder="Enter Description"></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+  </div>
+</div>
+</div>
