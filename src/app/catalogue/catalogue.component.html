@@ -1,0 +1,12 @@
+<div class="position-absolute start-50 translate-middle-x w-75" id="outer">
+    <h1 id="header">Catalogue</h1>
+    <div class="list-group">
+        @for (book of books; track book) {
+            <app-book id={{book.id}}
+                      title={{book.title}}
+                      authors={{book.authors}}
+                      description={{book.description}}>
+            </app-book>
+        }
+    </div>
+</div>
