@@ -2,11 +2,10 @@
     <h1 id="header">Catalogue</h1>
     <div class="list-group">
         @for (book of books; track book) {
-            <app-book id={{book.id}}
-                      title={{book.title}}
-                      authors={{book.authors}}
-                      description={{book.description}}>
-            </app-book>
+        <app-book [book]="book"></app-book>
         }
     </div>
 </div>
+
+<app-book-form (onSave)="loadBooks()"></app-book-form>
+

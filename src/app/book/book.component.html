@@ -1,8 +1,8 @@
-<button type="button" class="list-group-item list-group-item-action">
+<button type="button" class="list-group-item list-group-item-action" (click)="gotoBookDetailPage(book)">
     <div>
         <img src="">
     </div>
-    <h1>{{title}}</h1>
-    <h2>{{authors}}</h2><br>
-    <p>{{description}}</p>
+    <h1>{{book?.title}}</h1>
+    <h2>{{book?.authors}}</h2><br>
+    <p>{{book?.description}}</p>
 </button>
