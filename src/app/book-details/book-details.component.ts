@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { BookService } from '../book.service';
+import { CommonModule, NgFor } from '@angular/common';
 
 @Component({
   selector: 'app-book-details',
   standalone: true,
-  imports: [],
+  imports: [CommonModule, NgFor],
   templateUrl: './book-details.component.html',
   styleUrl: './book-details.component.scss'
 })
@@ -27,6 +28,7 @@ export class BookDetailsComponent {
   loadBook() {
     this.bookService.getBook(this.id).subscribe(book => {
       this.book = book;
+      console.log("auteurs", book)
     })
   }
 

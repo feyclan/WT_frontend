@@ -1,41 +1,49 @@
 import { Component, Output, output } from '@angular/core';
-import { ReactiveFormsModule, FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { ReactiveFormsModule, FormControl, FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { BookService } from '../book.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-book-form',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './book-form.component.html',
   styleUrl: './book-form.component.scss'
 })
 export class BookFormComponent {
 
-  onSave = output<void>(); // OutputEmitterRef<string>
+  onSave = output<void>();
 
-  bookForm = new FormGroup({
-    title: new FormControl(''),
-    author: new FormControl(''),
-    description: new FormControl(''),
-  });
+  bookForm: FormGroup;
 
   constructor(private bookService: BookService, private formBuilder: FormBuilder) {
-    this.bookForm = this.formBuilder.group(
-      {
-        title: ['', Validators.required],
-        author: ['', Validators.required],
-        description: ['', Validators.required],
+      this.bookForm = this.formBuilder.group({
+        title: new FormControl('', [Validators.required]),
+        authors: new FormArray([], Validators.required),
+        description: new FormControl('', [Validators.required]),
       }
     )
+  }
+
+  // ngOnInit(): void {
+  //   this.addAuthor();
+  // }
+
+  addAuthor() {
+    this.authors.push(this.formBuilder.control('', Validators.required));
+  }
+
+  removeAuthor(index: number) {
+    this.authors.removeAt(index);
   }
 
   onSubmit(): void {
     let dto = {
       title: this.bookForm.value.title,
-      authors: [this.bookForm.value.author],
+      authors: this.bookForm.value.authors,
       description: this.bookForm.value.description
     }
-    
+
     this.bookService.addBook(dto).subscribe(() => {
       // Dit wordt uitgevoerd nadat we een reponse hebben ontvangen
       alert('Boek is aangemaakt');
@@ -44,6 +52,15 @@ export class BookFormComponent {
 
       this.onSave.emit();
     });
+  }
+
+  get authors() {
+    return this.bookForm.get('authors') as FormArray;
+  }
+
+  resetForm() {
+    this.bookForm.reset();
+    this.authors.clear();
   }
 
 }

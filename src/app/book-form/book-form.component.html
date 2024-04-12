@@ -1,4 +1,4 @@
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#saveBookModal">
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#saveBookModal" (click)="addAuthor()">
   Add book
 </button>
 
@@ -7,29 +7,40 @@
   <div class="modal-dialog">
       <div class="modal-content">
           <div class="modal-header">
-              <h1 class="modal-title fs-5" id="saveBookModalLabel">Modal title</h1>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              <h1 class="modal-title fs-5" id="saveBookModalLabel">Add book</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="resetForm()"></button>
           </div>
           <div class="modal-body">
-            <form [formGroup]="bookForm" (ngSubmit)="onSubmit()">
+            <form [formGroup]="bookForm">
               <div class="mb-3">
                 <label for="bookTitle">Title</label><br>
                 <input formControlName="title" class="form-control" type="text" id="bookTitle" placeholder="Enter Title">
               </div>
-              <div class="mb-3">
+              <!-- <div formArrayName="authors" class="mb-3">
                 <label for="bookAuthor">Author</label><br>
-                <input formControlName="author" class="form-control" type="text" id="bookAuthor" placeholder="Enter Author">
+                <input formArrayName="authors" class="form-control" type="text" id="bookAuthor" placeholder="Enter Author">
+              </div> -->
+              <!-- @for (author of authors.controls; track $index) { -->
+              <div *ngFor="let authors of authors.controls; let i=index">
+                <label for="bookAuthor">Author</label>
+                <div formArrayName="authors" class="input-group mb-3">
+                  <input [formControlName]="i" class="form-control" type="text" id="bookAuthor" placeholder="Enter Author">
+                  <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" id="minus" type="button" (click)="removeAuthor(i)">-</button>
+                  </div>
+                </div>
               </div>
+              <!-- } -->
+              <button class="btn" id="plus" type="button" (click)="addAuthor()">+ add author</button>
               <div class="mb-3">
-                <label for="bookAuthor">Description</label><br>
+                <label for="bookDescription">Description</label><br>
                 <textarea formControlName="description" class="form-control" type="text" id="bookDesc" placeholder="Enter Description"></textarea>
               </div>
-              <button [disabled]="bookForm.invalid" type="submit" class="btn btn-primary">Submit</button>
             </form>
           </div>
           <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Save book</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="resetForm()">Close</button>
+            <button [disabled]="bookForm.invalid" type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="onSubmit()">Save book</button>
           </div>
       </div>
   </div>
