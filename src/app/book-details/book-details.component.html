@@ -1,8 +1,13 @@
-<div class="table-responsive w-50">
+
+<img class="bookCover float-start" src="assets/imgs/bookCover.png">
+
+<div id="table" class="table-responsive position-relative float-start w-50">
   <table class="table align-middle table-bordered">
     <thead>
       <tr>
-        <th id="header" class="text-center" colspan="2" scope="col">Boek details</th>
+        <th id="header" class="text-center" colspan="2" scope="col">
+          Boek details
+        </th>
       </tr>
     </thead>
     <tbody>
@@ -13,10 +18,11 @@
       <tr>
         <th scope="row">Auteurs</th>
         <td>
-            <!-- {{ book?.authors[0].name }} -->
-            <span>
-                <ng-container *ngFor="let item of book.authors"> {{item.name}} <br></ng-container>
-            </span>
+          <span>
+            <ng-container *ngFor="let item of book.authors">
+              {{ item.name }} <br>
+            </ng-container>
+          </span>
         </td>
       </tr>
       <tr>

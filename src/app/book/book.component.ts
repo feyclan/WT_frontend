@@ -1,27 +1,24 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, output } from '@angular/core';
 import { ReadBookDto } from '../../dto/ReadBookDto';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { BookService } from '../book.service';
+import { CatalogueComponent } from '../catalogue/catalogue.component';
 
 @Component({
   selector: 'app-book',
   standalone: true,
-  imports: [],
+  imports: [CommonModule, CatalogueComponent],
   templateUrl: './book.component.html',
   styleUrl: './book.component.scss'
 })
 export class BookComponent {
-  // @Input() id: any;
-  // @Input() title: String;
-  // @Input() authors: String;
-  // @Input() description: String;
 
   @Input() book: ReadBookDto | null = null;
 
-  constructor(private router: Router) {
-  }
+  onDelete = output<void>();
 
-  onSubmit() {
-    
+  constructor(private router: Router, private bookService: BookService) {
   }
 
   gotoBookDetailPage(book: ReadBookDto | null) {
@@ -30,6 +27,15 @@ export class BookComponent {
       this.router.navigateByUrl('book/' + book.id);
 
       // window.location.href = '';
+    }
+  }
+
+  deleteBook() {
+    if (!!this.book){
+      this.bookService.deleteBook(this.book.id).subscribe(() => {
+        alert("Boek is verwijderd")
+        this.onDelete.emit();
+      });
     }
   }
 

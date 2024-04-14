@@ -6,6 +6,29 @@ h2 {
     font-size: 20px;
 }
 
-// button {
-//     width: min(90vw, 500px);
-// }
+.card {
+    margin: 20px 0px 0px 50px;
+}
+
+img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.card-img-left {
+    width: 150px;
+}
+
+#title {
+    background: none;
+    border: none;
+}
+
+#title:hover {
+    text-decoration: underline;
+}
+
+.dropdown {
+    background-color: none;
+    border: none;
+}

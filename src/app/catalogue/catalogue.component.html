@@ -1,11 +1,17 @@
-<div class="position-absolute start-50 translate-middle-x w-75" id="outer">
+<!-- <div class="position-absolute start-50 translate-middle-x w-75" id="outer">
     <h1 id="header">Catalogue</h1>
     <div class="list-group">
         @for (book of books; track book) {
         <app-book [book]="book"></app-book>
         }
     </div>
+</div> -->
+
+
+<div class="card-deck w-75">
+    @for (book of books; track book) {
+        <app-book (onDelete)="loadBooks()" [book]="book"></app-book>
+        }
 </div>
 
 <app-book-form (onSave)="loadBooks()"></app-book-form>
-

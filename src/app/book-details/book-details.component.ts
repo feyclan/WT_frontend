@@ -1,7 +1,7 @@
+import { CommonModule, NgFor } from '@angular/common';
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { BookService } from '../book.service';
-import { CommonModule, NgFor } from '@angular/common';
 
 @Component({
   selector: 'app-book-details',
@@ -28,8 +28,6 @@ export class BookDetailsComponent {
   loadBook() {
     this.bookService.getBook(this.id).subscribe(book => {
       this.book = book;
-      console.log("auteurs", book)
     })
   }
-
 }

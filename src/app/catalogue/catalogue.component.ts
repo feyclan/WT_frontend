@@ -24,7 +24,6 @@ export class CatalogueComponent implements OnInit {
   loadBooks() {
     this.bookService.getBooks().subscribe((data) => {
       this.books = data;
-      console.log(data);
     });
   }
 
