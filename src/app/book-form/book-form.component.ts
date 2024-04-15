@@ -2,6 +2,7 @@ import { Component, Output, output } from '@angular/core';
 import { ReactiveFormsModule, FormControl, FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { BookService } from '../book.service';
 import { CommonModule } from '@angular/common';
+import { variationPlacements } from '@popperjs/core';
 
 @Component({
   selector: 'app-book-form',
@@ -21,6 +22,8 @@ export class BookFormComponent {
         title: new FormControl('', [Validators.required]),
         authors: new FormArray([], Validators.required),
         description: new FormControl('', [Validators.required]),
+        isbn: new FormControl(''),
+        publishingDate: new FormControl('', [Validators.required])
       }
     )
   }
@@ -41,7 +44,9 @@ export class BookFormComponent {
     let dto = {
       title: this.bookForm.value.title,
       authors: this.bookForm.value.authors,
-      description: this.bookForm.value.description
+      description: this.bookForm.value.description,
+      isbn: this.bookForm.value.isbn,
+      publishingDate: this.bookForm.value.publishingDate
     }
 
     this.bookService.addBook(dto).subscribe(() => {

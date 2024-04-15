@@ -2,6 +2,7 @@ import { CommonModule, NgFor } from '@angular/common';
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { BookService } from '../book.service';
+import { ReservationService } from '../reservation.service';
 
 @Component({
   selector: 'app-book-details',
@@ -16,7 +17,7 @@ export class BookDetailsComponent {
   book: any;
 
   // Activated route is de huidige route
-  constructor(private activatedRoute: ActivatedRoute, private bookService: BookService) {
+  constructor(private activatedRoute: ActivatedRoute, private bookService: BookService, private reservationService: ReservationService) {
     // Hiermee lezen we de :id uit de routing
     this.id = this.activatedRoute.snapshot.params['id'];
 
@@ -28,6 +29,26 @@ export class BookDetailsComponent {
   loadBook() {
     this.bookService.getBook(this.id).subscribe(book => {
       this.book = book;
+    })
+  }
+
+  createReservation(): void {
+    let reservationDto = {
+      reservationRequest: "PENDING",
+      requestDate: new Date(),
+      book: this.id,
+      user: 1 // TODO: This need to be the id of the current user.
+    }
+
+    this.reservationService.addReservation(reservationDto).subscribe(response => {
+      console.log(reservationDto);
+      if (response.success) {
+        alert("Je reserverings aanvraag is gemaakt.");
+      }
+      else {
+        alert("Er is iets fout gegaam bij het maken van de reservering: " + response.errors);
+        console.log(response);
+      }
     })
   }
 }

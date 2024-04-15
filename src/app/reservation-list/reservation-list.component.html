@@ -1,0 +1,19 @@
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th scope="col">Trainee</th>
+            <th scope="col">Boek</th>
+            <th scope="col">Aanvraag datum</th>
+            <th scope="col">Goedkeuren</th>
+            <th scope="col">Annuleren</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (reservation of reservations; track reservation) {
+            <tr>
+                <th scope="row"></th>
+                <td>{{reservation.user}}</td>
+            </tr>
+        }
+    </tbody>
+</table>

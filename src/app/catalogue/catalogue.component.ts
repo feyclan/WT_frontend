@@ -15,11 +15,11 @@ import { BookService } from '../book.service';
 export class CatalogueComponent implements OnInit {
   books = new Array<ReadBookDto>();
 
+  constructor(private bookService: BookService) {}
+
   ngOnInit(): void {
     this.loadBooks();
   }
-
-  constructor(private bookService: BookService) {}
 
   loadBooks() {
     this.bookService.getBooks().subscribe((data) => {

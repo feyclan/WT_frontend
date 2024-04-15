@@ -4,6 +4,8 @@ import { BookFormComponent } from './book-form/book-form.component';
 import { CatalogueComponent } from './catalogue/catalogue.component';
 import { BookComponent } from './book/book.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { UserListComponent } from './user-list/user-list.component';
+import { UserComponent } from './user/user.component';
 
 @Component({
   selector: 'app-root',
@@ -13,7 +15,9 @@ import { NavbarComponent } from './navbar/navbar.component';
     BookFormComponent,
     CatalogueComponent,
     BookComponent,
-    NavbarComponent
+    NavbarComponent,
+    UserListComponent,
+    UserComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
