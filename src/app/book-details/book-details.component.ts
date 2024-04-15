@@ -27,8 +27,9 @@ export class BookDetailsComponent {
   }
 
   loadBook() {
-    this.bookService.getBook(this.id).subscribe(book => {
-      this.book = book;
+    this.bookService.getBook(this.id).subscribe(response => {
+      this.book = response.data;
+      console.log(this.book);
     })
   }
 
