@@ -11,12 +11,12 @@ export class BookService {
 
   constructor(private http: HttpClient) {}
 
-  getBooks(): Observable<ReadBookDto[]> {
-    return this.http.get<ReadBookDto[]>("http://localhost:8080/book/all");
+  getBooks(): Observable<ResponseDto> {
+    return this.http.get<ResponseDto>("http://localhost:8080/book/all");
   }
 
-  getBook(id: number): Observable<any> {
-    return this.http.get<any>("http://localhost:8080/book/" + id);
+  getBook(id: number): Observable<ResponseDto> {
+    return this.http.get<ResponseDto>("http://localhost:8080/book/" + id);
   }
 
   addBook(book: any): Observable<any> {
