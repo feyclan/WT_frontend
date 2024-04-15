@@ -10,7 +10,7 @@ export class ReservationService {
 
   constructor(private http: HttpClient) { }
 
-  getReservations() {
+  getReservations(): Observable<ResponseDto>{
     return this.http.get<ResponseDto>("http://localhost:8080/reservation/all");
   }
 

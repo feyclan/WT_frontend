@@ -6,6 +6,8 @@ import { BookComponent } from './book/book.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { UserListComponent } from './user-list/user-list.component';
 import { UserComponent } from './user/user.component';
+import { ReservationListComponent } from './reservation-list/reservation-list.component';
+import { ReservationComponent } from './reservation/reservation.component';
 
 @Component({
   selector: 'app-root',
@@ -17,7 +19,9 @@ import { UserComponent } from './user/user.component';
     BookComponent,
     NavbarComponent,
     UserListComponent,
-    UserComponent
+    UserComponent,
+    ReservationListComponent,
+    ReservationComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'

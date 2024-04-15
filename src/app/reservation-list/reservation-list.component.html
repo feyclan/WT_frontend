@@ -9,11 +9,6 @@
         </tr>
     </thead>
     <tbody>
-        @for (reservation of reservations; track reservation) {
-            <tr>
-                <th scope="row"></th>
-                <td>{{reservation.userId}}</td>
-            </tr>
-        }
+        <tr *ngFor="let reservation of reservations" app-reservation [reservation]="reservation"></tr>
     </tbody>
 </table>

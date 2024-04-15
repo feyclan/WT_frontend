@@ -15,5 +15,8 @@ export class UserService {
     return this.http.get<ResponseDto>("http://localhost:8080/user/all");
   }
 
+  getUser(id: number): Observable<ResponseDto> {
+    return this.http.get<ResponseDto>("http://localhost:8080/user/" + id);
+  }
 
 }

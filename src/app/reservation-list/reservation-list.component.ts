@@ -2,11 +2,13 @@ import { Component } from '@angular/core';
 import { ReservationDto } from '../../dto/ReadReservationDto';
 import { ReservationService } from '../reservation.service';
 import { BookService } from '../book.service';
+import { ReservationComponent } from '../reservation/reservation.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-reservation-list',
   standalone: true,
-  imports: [],
+  imports: [ReservationComponent, CommonModule],
   templateUrl: './reservation-list.component.html',
   styleUrl: './reservation-list.component.scss'
 })
@@ -18,10 +20,6 @@ export class ReservationListComponent {
 
   ngOnInit(): void {
     this.loadReservations();
-  }
-
-  getBookById(id: number) {
-    this.bookService.getBook(id).subscribe();
   }
 
   loadReservations() {
