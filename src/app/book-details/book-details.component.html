@@ -1,0 +1,48 @@
+
+<img class="bookCover float-start" src="assets/imgs/bookCover.png">
+
+<div id="table" class="table-responsive position-relative float-start w-50">
+  <table class="table align-middle table-bordered">
+    <thead>
+      <tr>
+        <th id="header" class="text-center" colspan="2" scope="col">
+          Boek details
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">Titel</th>
+        <td>{{ book?.title }}</td>
+      </tr>
+      <tr>
+        <th scope="row">Auteurs</th>
+        <td>
+          <span>
+            <ng-container *ngFor="let item of book.authors">
+              {{ item }} <br>
+            </ng-container>
+          </span>
+        </td>
+      </tr>
+      <tr>
+        <th scope="row">Beschrijving</th>
+        <td>{{ book?.description }}</td>
+      </tr>
+      <tr>
+        <th scope="row">Publicatie datum</th>
+        <td>{{ book?.publishingDate }}</td>
+      </tr>
+      <tr>
+        <th scope="row">ISBN</th>
+        <td>{{ book?.isbn }}</td>
+      </tr>
+      <tr>
+        <th scope="row">Aantal kopieën</th>
+        <td>{{ book?.copyCount }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<button type="button" class="btn btn-success" (click)="createReservation()">Reserveer boek</button>
