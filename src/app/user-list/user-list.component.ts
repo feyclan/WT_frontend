@@ -24,7 +24,7 @@ export class UserListComponent {
   loadUsers() {
     this.userService.getUsers().subscribe((response) => {
       this.users = response.data;
-      console.log(this.users)
+      console.log(this.users);
     });
   }
 

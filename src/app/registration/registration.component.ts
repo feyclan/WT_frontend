@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, output } from '@angular/core';
 import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-registration',
@@ -10,6 +11,8 @@ import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Reacti
   styleUrl: './registration.component.scss'
 })
 export class RegistrationComponent {
+  onSave = output<void>();
+
   registrationForm: FormGroup = new FormGroup({
     firstName: new FormControl(''),
     lastName: new FormControl(''),
@@ -17,11 +20,10 @@ export class RegistrationComponent {
     password: new FormControl(''),
     confirmPassword: new FormControl(''),
     role: new FormControl(''),
-
   });
 
   submitted: boolean = false;
-  constructor(private formBuilder: FormBuilder) {}
+  constructor(private userService: UserService, private formBuilder: FormBuilder) {}
 
   get firstName() {
     return this.registrationForm.controls['firstName'];
@@ -55,6 +57,24 @@ export class RegistrationComponent {
     {
       validators: this.passwordMatchValidator
     })
+  }
+
+  onSubmit() {
+    let dto = {
+      firstName: this.registrationForm.value.firstName,
+      lastName: this.registrationForm.value.lastName,
+      email: this.registrationForm.value.email,
+      password: this.registrationForm.value.password,
+      role: this.registrationForm.value.role
+    }
+    this.userService.addUser(dto).subscribe(() => {
+      alert("User is aangemaakt");
+      console.log(dto);
+      this.registrationForm.reset();
+      this.onSave.emit();
+
+    })
+
   }
 
   passwordMatchValidator(control: AbstractControl) {
