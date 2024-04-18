@@ -1,0 +1,129 @@
+<button
+  type="button"
+  class="btn btn-primary"
+  data-bs-toggle="modal"
+  data-bs-target="#registerModal"
+>
+  Gebruiker registreren
+</button>
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="registerModal"
+  tabindex="-1"
+  aria-labelledby="registerModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="registerModalLabel">
+          Gebruiker registreren
+        </h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="registrationForm">
+          <div class="mb-3">
+            <label for="firstName">Voornaam</label>
+            <input
+              formControlName="firstName"
+              class="form-control"
+              type="text"
+              id="firstName"
+              placeholder="Voornaam"
+            />
+            <small *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)" class="invalid">
+                <div *ngIf="firstName.errors?.['required']">Voornaam is vereist</div>
+            </small>
+          </div>
+          <div class="mb-3">
+            <label for="lastName">Achternaam</label>
+            <input
+              formControlName="lastName"
+              class="form-control"
+              type="text"
+              id="lastName"
+              placeholder="Achternaam"
+            />
+            <small *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)" class="invalid">
+                <div *ngIf="lastName.errors?.['required']">Achternaam is vereist</div>
+            </small>
+          </div>
+          <div class="mb-3">
+            <label for="email">Email</label>
+            <input
+              formControlName="email"
+              class="form-control"
+              type="text"
+              id="email"
+              placeholder="Email"
+            />
+            <small *ngIf="email.invalid && (email.dirty || email.touched)" class="invalid">
+                <div *ngIf="email.errors?.['required']">Email is vereist</div>
+                <div *ngIf="email.errors?.['email']">Dit is geen geldige email</div>
+            </small>
+          </div>
+          <label for="password">Wachtwoord</label>
+          <div class="mb-3">
+            <input
+              formControlName="password"
+              class="form-control"
+              type="password"
+              id="password"
+              placeholder="Wachtwoord"
+            />
+            <small *ngIf="password.invalid && (password.dirty || password.touched)" class="invalid">
+                <div *ngIf="password.errors?.['required']">Wachtwoord is vereist</div>
+            </small>
+          </div>
+          <div class="mb-3">
+            <label for="confirmPassword">Bevestig Wachtwoord</label>
+            <input
+              formControlName="confirmPassword"
+              class="form-control"
+              type="password"
+              id="confirmPassword"
+              placeholder="Bevestig Wachtwoord"
+            />
+            <small *ngIf="confirmPassword.invalid && (confirmPassword.dirty || confirmPassword.touched)" class="invalid">
+                <div *ngIf="confirmPassword.errors?.['required']">Wachtwoord is vereist</div>
+            </small>
+            <small *ngIf="registrationForm.errors?.['mismatch'] && confirmPassword.valid && password.valid" class="invalid">
+                Wachtwoorden komen niet overeen
+            </small>
+          </div>
+          <div class="input-group mb-3">
+            <label class="input-group-text" for="inputGroupSelect01">Rol</label>
+            <select class="form-select" id="inputGroupSelect01" formControlName="role">
+              <option value="TRAINER">Trainer</option>
+              <option value="TRAINEE">Trainee</option>
+              <option value="FRONTOFFICE">Front-office</option>
+            </select>
+            <div></div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Cancel
+        </button>
+        <button
+          [disabled]="registrationForm.invalid"
+          type="button"
+          class="btn btn-primary"
+          data-bs-dismiss="modal"
+          (click)="onSubmit()"
+        >
+          Opslaan
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

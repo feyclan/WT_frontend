@@ -19,4 +19,8 @@ export class UserService {
     return this.http.get<ResponseDto>("http://localhost:8080/user/" + id);
   }
 
+  addUser(user: any): Observable<any> {
+    return this.http.post<any>("http://localhost:8080/user/create", user);
+  }
+
 }
