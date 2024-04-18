@@ -38,7 +38,6 @@ export class BookDetailsComponent {
       reservationRequest: "PENDING",
       requestDate: new Date(),
       bookId: this.id,
-      userId: 2 // TODO: This need to be the id of the current user.
     }
 
     this.reservationService.addReservation(reservationDto).subscribe(response => {
