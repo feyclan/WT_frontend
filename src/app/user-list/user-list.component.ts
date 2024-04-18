@@ -2,11 +2,12 @@ import { Component } from '@angular/core';
 import { UserComponent } from '../user/user.component';
 import { ReadUserDto } from '../../dto/ReadUserDto';
 import { UserService } from '../user.service';
+import { RegistrationComponent } from '../registration/registration.component';
 
 @Component({
   selector: 'app-user-list',
   standalone: true,
-  imports: [UserComponent],
+  imports: [UserComponent, RegistrationComponent],
   templateUrl: './user-list.component.html',
   styleUrl: './user-list.component.scss'
 })
@@ -23,7 +24,7 @@ export class UserListComponent {
   loadUsers() {
     this.userService.getUsers().subscribe((response) => {
       this.users = response.data;
-      console.log(this.users)
+      console.log(this.users);
     });
   }
 

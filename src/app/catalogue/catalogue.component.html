@@ -14,4 +14,4 @@
         }
 </div>
 
-<app-book-form (onSave)="loadBooks()"></app-book-form>
+<app-book-form *ngIf="hasCreatePermission()" (onSave)="loadBooks()"></app-book-form>
