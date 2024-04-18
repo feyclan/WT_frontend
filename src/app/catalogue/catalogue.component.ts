@@ -4,6 +4,7 @@ import { BookComponent } from '../book/book.component';
 import { ReadBookDto } from '../../dto/ReadBookDto';
 import { BookFormComponent } from '../book-form/book-form.component';
 import { BookService } from '../book.service';
+import { DataSharingService } from '../data-sharing.service';
 
 @Component({
   selector: 'app-catalogue',
@@ -13,6 +14,7 @@ import { BookService } from '../book.service';
   styleUrl: './catalogue.component.scss'
 })
 export class CatalogueComponent implements OnInit {
+  
   books = new Array<ReadBookDto>();
 
   constructor(private bookService: BookService) {}
@@ -22,9 +24,15 @@ export class CatalogueComponent implements OnInit {
   }
 
   loadBooks() {
-    this.bookService.getBooks().subscribe((response) => {
-      this.books = response.data;
+    this.bookService.getBooks(0).subscribe((response) => {
+      this.books = response.data.books;
     });
+  }
+
+  hasCreatePermission() {
+    let role = localStorage.getItem('WT_ROLE');
+
+    return !!role && role == 'TRAINER';
   }
 
 }
