@@ -20,7 +20,9 @@ export class LoginComponent {
       password: ['', Validators.required],
     });
 
-  constructor(private formBuilder: FormBuilder, private dataSharingService: DataSharingService, private userService: UserService, private router: Router) {
+  constructor(private formBuilder: FormBuilder,
+              private dataSharingService: DataSharingService,
+              private userService: UserService, private router: Router) {
 
   }
 
@@ -42,7 +44,7 @@ export class LoginComponent {
 
         this.router.navigateByUrl('catalogue');
       } else {
-        alert('Onjuist gegevens');
+        alert('Onjuiste gegevens');
       }
 
     })
