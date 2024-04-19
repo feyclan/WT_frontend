@@ -5,6 +5,7 @@ export class LoanDto {
     startDate?: Date;
     endDate?: Date;
     bookCopyId?: number;
+    isActive?: Boolean;
     userId?: number;
     bookId?: number;
 }
