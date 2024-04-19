@@ -34,18 +34,14 @@ export class LoanComponent {
     if (this.loan) {
       this.getBookCopyById(this.loan.bookCopyId);
       this.getUserById(this.loan.userId);
-      this.getBookById(this.bookCopy?.bookId);
+      this.getBookById(this.loan.bookId);
     }
   }
-
+  
   // Get all the info of the foreign tables by the provided ID
   getBookCopyById(id: any) {
     this.bookCopyService.getBookCopy(id).subscribe(resp => {
-      this.bookCopy = resp.data[0]; 
-      console.log("bookcopy", this.bookCopy)
-      resp.data.forEach((data: { id: any; })  => {
-        this.getBookById(data.id)
-      });
+      this.bookCopy = resp.data;
     });
   }
 
