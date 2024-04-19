@@ -1,0 +1,16 @@
+<div>
+    <h1>Leen Geschiedenis</h1>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th scope="col">Boek Titel</th>
+                <th scope="col">Auteurs</th>
+                <th scope="col">Datum Geleend</th>
+                <th scope="col">Datum Ingeleverd</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let loan of loans" app-loan [loan]="loan"></tr>
+        </tbody>
+    </table>
+</div>

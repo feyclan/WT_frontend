@@ -1,5 +1,5 @@
 <div>
-    <!-- <h1>Aangevraagd</h1>
+    <h1>Aangevraagd</h1>
     <table class="table table-bordered">
         <thead>
             <tr>
@@ -12,37 +12,6 @@
         </thead>
         <tbody>
             <tr *ngFor="let reservation of reservations" app-reservation [reservation]="reservation"></tr>
-        </tbody>
-    </table>
-
-    <h1>In Lening</h1>
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th scope="col">Trainee</th>
-                <th scope="col">Boek</th>
-                <th scope="col">Aanvraag datum</th>
-                <th scope="col">Goedkeuren</th>
-                <th scope="col">Annuleren</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let reservation of reservations" app-reservation [reservation]="reservation"></tr>
-        </tbody>
-    </table> -->
-
-    <h1>Leen Geschiedenis</h1>
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th scope="col">Boek Titel</th>
-                <th scope="col">Auteurs</th>
-                <th scope="col">Datum Geleend</th>
-                <th scope="col">Datum Ingeleverd</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let loan of loans" app-loan [loan]="loan"></tr>
         </tbody>
     </table>
 </div>
