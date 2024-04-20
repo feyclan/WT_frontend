@@ -6,11 +6,12 @@ import { UserService } from '../user.service';
 import { BookService } from '../book.service';
 import { BookCopyService } from '../bookCopy.service';
 import { ReadBookCopyDto } from '../../dto/ReadBookCopyDto';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: '[app-loan]',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './loan.component.html',
   styleUrl: './loan.component.scss'
 })
