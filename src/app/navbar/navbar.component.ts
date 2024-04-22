@@ -13,6 +13,7 @@ import { UserService } from '../user.service';
 export class NavbarComponent {
 
   role: string | null = null;
+  name: string | null = null;
 
   constructor(private dataSharingService: DataSharingService, private userService: UserService, private router : Router) {
 
@@ -23,6 +24,7 @@ export class NavbarComponent {
       console.log('NAVBAR: User has changed');
 
       this.role = localStorage.getItem('WT_ROLE');
+      this.name = localStorage.getItem('WT_NAME');
     })
   }
 
