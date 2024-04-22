@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { UserService } from '../user.service';
 import { LoginRequestDto } from '../../dto/LoginRequestDto';
-import { Router } from '@angular/router';
+import { Router} from '@angular/router';
 import { DataSharingService } from '../data-sharing.service';
 
 @Component({
@@ -24,6 +24,13 @@ export class LoginComponent {
               private dataSharingService: DataSharingService,
               private userService: UserService, private router: Router) {
 
+  }
+
+  ngOnInit() {
+    console.log(localStorage.getItem("WT_TOKEN"));
+    if(localStorage.getItem("WT_TOKEN") != null){
+      this.router.navigate(["/catalogue"]);
+    }    
   }
 
   login() {

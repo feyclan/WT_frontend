@@ -29,4 +29,8 @@ export class UserService {
     return this.http.post<ResponseDto>("http://localhost:8080/user/login", dto);
   }
 
+  logout(): Observable<ResponseDto>{
+    return this.http.post<ResponseDto>("http://localhost:8080/user/logout", "");
+  }
+
 }
