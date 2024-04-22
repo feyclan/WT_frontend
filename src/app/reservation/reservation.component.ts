@@ -4,6 +4,11 @@ import { ReadUserDto } from '../../dto/ReadUserDto';
 import { ReadBookDto } from '../../dto/ReadBookDto';
 import { BookService } from '../book.service';
 import { UserService } from '../user.service';
+import { LoanService } from '../loan.service';
+import { BookCopyService } from '../bookCopy.service';
+import { ReadBookCopyDto } from '../../dto/ReadBookCopyDto';
+import { ResponseDto } from '../../dto/ResponseDto';
+
 
 @Component({
   selector: '[app-reservation]',
@@ -17,7 +22,7 @@ export class ReservationComponent {
   book: ReadBookDto | null = null;
   user: ReadUserDto | null = null;
 
-  constructor(private bookService: BookService, private userService: UserService) {}
+  constructor(private bookService: BookService, private userService: UserService, private loanService: LoanService, private bookCopyService: BookCopyService) { }
 
   ngOnInit(): void {
     if (this.reservation) {
@@ -38,5 +43,35 @@ export class ReservationComponent {
     });
   }
 
+  acceptReservation() {
+    if (this.reservation && this.book && this.user) {
 
+      // get bookcopy data for the specific book
+      this.bookCopyService.getBookCopy(this.book.id).subscribe(bookCopyResponse => {
+        const bookCopyData: ReadBookCopyDto[] = bookCopyResponse.data;
+
+        // check if bookCopy is available and find first bookCopy
+        const availableBookCopy = bookCopyData.find(copy => copy.available);
+
+        // give loan data and create loan
+        if (availableBookCopy) {
+          const loanData = {
+            conditionStart: availableBookCopy.state,
+            startDate: new Date(),
+            bookCopyId: availableBookCopy.id,
+            isActive: true,
+            userId: this.user?.id,
+            bookId: this.book?.id
+          };
+
+          this.loanService.createLoan(loanData).subscribe(response => {
+            console.log('Loan created:', response);
+          });
+        } else {
+          alert("No book copies available")
+        }
+      }
+      )
+    }
+  }
 }
