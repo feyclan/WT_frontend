@@ -1,5 +1,5 @@
-<div>
-    <h1>Aangevraagd</h1>
+<div id="container">
+    <h2>Aangevraagde reserveringen:</h2>
     <table class="table table-bordered">
         <thead>
             <tr>
@@ -11,7 +11,26 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let reservation of reservations" app-reservation [reservation]="reservation"></tr>
+            <ng-container *ngFor="let reservation of reservations">
+                <tr *ngIf="reservation.reservationRequest === 'PENDING'" app-reservation [reservation]="reservation"></tr>
+            </ng-container>
+        </tbody>
+    </table>
+    
+    <h2>Actieve leningen:</h2>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th scope="col">Trainee</th>
+                <th scope="col">Boek</th>
+                <th scope="col">Datum geleend</th>
+                <th scope="col">Boek innemen</th>
+            </tr>
+        </thead>
+        <tbody>
+            <ng-container *ngFor="let loan of loans">
+                <tr *ngIf="loan.isActive" app-loan [loan]="loan" [isReservationList]="true"></tr>
+            </ng-container>
         </tbody>
     </table>
 </div>

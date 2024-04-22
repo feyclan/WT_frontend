@@ -2,4 +2,4 @@
 <td><a href="book/{{book?.id}}">{{book?.title}}</a></td>
 <td>{{reservation?.requestDate}}</td>
 <td><button type="button" class="btn btn-success" (click)="acceptReservation()">Goedkeuren</button></td>
-<td><button type="button" class="btn btn-danger">Afwijzen</button></td>
+<td><button type="button" class="btn btn-danger" (click)="denyReservation()">Afwijzen</button></td>

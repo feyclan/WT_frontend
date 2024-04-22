@@ -5,9 +5,9 @@ import { ReadBookDto } from '../../dto/ReadBookDto';
 import { BookService } from '../book.service';
 import { UserService } from '../user.service';
 import { LoanService } from '../loan.service';
+import { ReservationService } from '../reservation.service';
 import { BookCopyService } from '../bookCopy.service';
 import { ReadBookCopyDto } from '../../dto/ReadBookCopyDto';
-import { ResponseDto } from '../../dto/ResponseDto';
 
 
 @Component({
@@ -22,7 +22,7 @@ export class ReservationComponent {
   book: ReadBookDto | null = null;
   user: ReadUserDto | null = null;
 
-  constructor(private bookService: BookService, private userService: UserService, private loanService: LoanService, private bookCopyService: BookCopyService) { }
+  constructor(private bookService: BookService, private userService: UserService, private loanService: LoanService, private bookCopyService: BookCopyService, private reservationService: ReservationService) { }
 
   ngOnInit(): void {
     if (this.reservation) {
@@ -53,8 +53,16 @@ export class ReservationComponent {
         // check if bookCopy is available and find first bookCopy
         const availableBookCopy = bookCopyData.find(copy => copy.available);
 
-        // give loan data and create loan
         if (availableBookCopy) {
+          // change reservationRequest status
+          if (this.reservation?.reservationRequest == "PENDING") {
+            this.reservation.reservationRequest = "ACCEPTED"
+            this.reservationService.updateReservation(this.reservation).subscribe(response => {
+              console.log('Reservation updated:', response);
+            });
+          }
+
+          // create loan
           const loanData = {
             conditionStart: availableBookCopy.state,
             startDate: new Date(),
@@ -66,12 +74,25 @@ export class ReservationComponent {
 
           this.loanService.createLoan(loanData).subscribe(response => {
             console.log('Loan created:', response);
+            alert("Lening aangemaakt")
           });
         } else {
-          alert("No book copies available")
+          alert("Geen boek kopieën beschikbaar")
         }
       }
       )
+    }
+  }
+
+  denyReservation() {
+    if (this.reservation) {
+      if (this.reservation?.reservationRequest == "PENDING") {
+        this.reservation.reservationRequest = "DENIED"
+        this.reservationService.updateReservation(this.reservation).subscribe(response => {
+          console.log('Reservation updated:', response);
+          alert("Aanvraag afgewezen")
+        });
+      }
     }
   }
 }
