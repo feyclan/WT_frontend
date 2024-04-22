@@ -1,6 +1,8 @@
 export class ReadBookCopyDto {
-    state: string = '';
-    id: number = 0;
-    wtid: string = '';
-    available: boolean = true;
+    id?: number;
+    wtid?: string;
+    isAvailable?: boolean;
+    state?: string;
+    bookId?: number;
+    available?: boolean;
 }

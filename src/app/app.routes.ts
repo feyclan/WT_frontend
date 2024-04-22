@@ -5,6 +5,7 @@ import { BookDetailsComponent } from './book-details/book-details.component';
 import { UserListComponent } from './user-list/user-list.component';
 import { ReservationListComponent } from './reservation-list/reservation-list.component';
 import { LoginComponent } from './login/login.component';
+import { LoanListComponent } from './loan-list/loan-list.component';
 
 export const routes: Routes = [
     {path: 'book-form', component: BookFormComponent},
@@ -12,5 +13,6 @@ export const routes: Routes = [
     {path: 'book/:id', component: BookDetailsComponent},
     {path: 'users', component: UserListComponent},
     {path: 'reservations', component: ReservationListComponent},
+    {path: 'loans', component: LoanListComponent},
     {path: 'login', component: LoginComponent}
 ];
