@@ -1,0 +1,120 @@
+<button
+  type="button"
+  class="btn btn-primary"
+  data-bs-toggle="modal"
+  data-bs-target="#addCopiesModal"
+>
+  + Exemplaren
+</button>
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  id="addCopiesModal"
+  tabindex="-1"
+  aria-labelledby="addCopiesLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="addCopiesLabel">
+          Exemplaren toevoegen
+        </h1>
+        <button
+          type="button"
+          #closeModal
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+          (click)="resetForm()"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="addCopiesForm">
+          <label for="nrCopies">Exemplaren toevoegen</label><br />
+          <div class="input-group mb-3">
+            <input
+              type="number"
+              formControlName="nrCopies"
+              class="form-control"
+              placeholder="Aantal exemplaren"
+              aria-describedby="button-addon2"
+            />
+            <button
+              class="btn btn-outline-secondary"
+              type="button"
+              id="button-addon2"
+              (click)="addCopies(addCopiesForm.value.nrCopies)"
+            >
+              Toevoegen
+            </button>
+          </div>
+          <div *ngFor="let state of states.controls; let j = index">
+            <label for="bookCopy">Exemplaar {{ j + 1 }}</label>
+            <div formArrayName="states" class="input-group mb-3">
+              <select
+                [formControlName]="j"
+                class="form-control"
+                id="bookCopy"
+              >
+              <option value="Nieuw">Nieuw</option>
+              <option value="Goed">Goed</option>
+              <option value="Gemiddeld">Gemiddeld</option>
+              <option value="Slecht">Slecht</option>
+              <option value="Onbruikbaar">Onbruikbaar</option>
+            </select>
+              <div class="input-group-append">
+                <button
+                  class="btn btn-outline-secondary"
+                  id="minus"
+                  type="button"
+                  (click)="removeCopy(j)"
+                >
+                  -
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="resetForm()">
+          Cancel
+        </button>
+        <button
+          [disabled]="addCopiesForm.invalid"
+          type="button"
+          class="btn btn-primary"
+          (click)="onSubmit()"
+        >
+          Opslaan
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<button type="button" #openModal class="btn btn-primary invisible" data-bs-toggle="modal" data-bs-target="#confirmModal">
+</button>
+
+<div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Toegevoegd</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div *ngFor="let bookcopy of bookCopyList">
+          <h5>Exemplaar {{bookcopy.wtid}}     Conditie: {{bookcopy.state}}</h5>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">OK</button>
+      </div>
+    </div>
+  </div>
+</div>

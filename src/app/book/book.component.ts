@@ -4,11 +4,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { BookService } from '../book.service';
 import { CatalogueComponent } from '../catalogue/catalogue.component';
+import { AddCopiesComponent } from '../add-copies/add-copies.component';
 
 @Component({
   selector: 'app-book',
   standalone: true,
-  imports: [CommonModule, CatalogueComponent],
+  imports: [CommonModule, CatalogueComponent, AddCopiesComponent],
   templateUrl: './book.component.html',
   styleUrl: './book.component.scss'
 })
