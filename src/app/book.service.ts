@@ -1,8 +1,9 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ReadBookDto } from '../dto/ReadBookDto';
 import { ResponseDto } from '../dto/ResponseDto';
+import { CreateBookDto } from '../dto/CreateBookDto';
 
 @Injectable({
   providedIn: 'root'
@@ -19,8 +20,8 @@ export class BookService {
     return this.http.get<ResponseDto>("http://localhost:8080/book/" + id);
   }
 
-  addBook(book: any): Observable<any> {
-    return this.http.post<any>("http://localhost:8080/book/create", book);
+  addBook(book: CreateBookDto): Observable<ResponseDto> {
+    return this.http.post<ResponseDto>("http://localhost:8080/book/create", book);
   }
 
   deleteBook(id: number): Observable<any> {

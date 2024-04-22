@@ -1,10 +1,9 @@
 import { CommonModule, NgFor } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { BookComponent } from '../book/book.component';
 import { ReadBookDto } from '../../dto/ReadBookDto';
 import { BookFormComponent } from '../book-form/book-form.component';
 import { BookService } from '../book.service';
-import { DataSharingService } from '../data-sharing.service';
+import { BookComponent } from '../book/book.component';
 
 @Component({
   selector: 'app-catalogue',
@@ -14,9 +13,9 @@ import { DataSharingService } from '../data-sharing.service';
   styleUrl: './catalogue.component.scss'
 })
 export class CatalogueComponent implements OnInit {
-  
-  books = new Array<ReadBookDto>();
 
+  books = new Array<ReadBookDto>();
+  page: number = 0;
   constructor(private bookService: BookService) {}
 
   ngOnInit(): void {
@@ -24,7 +23,8 @@ export class CatalogueComponent implements OnInit {
   }
 
   loadBooks() {
-    this.bookService.getBooks(0).subscribe((response) => {
+    this.bookService.getBooks(this.page).subscribe((response) => {
+      console.log(response);
       this.books = response.data.books;
     });
   }
