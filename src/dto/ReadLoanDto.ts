@@ -8,4 +8,6 @@ export class LoanDto {
     isActive?: Boolean;
     userId?: number;
     bookId?: number;
+    bookTitle?: string;
+    bookAuthors?: [];
 }
