@@ -43,7 +43,7 @@ export class BookFormComponent {
 
   addCopies(nrCopies: number) {
     for (let i = 0; i < nrCopies; i++) {
-      this.states.push(this.formBuilder.control('Nieuw', Validators.required));
+      this.states.push(this.formBuilder.control('NIEUW', Validators.required));
     }
   }
 
@@ -76,6 +76,7 @@ export class BookFormComponent {
         // Dit wordt uitgevoerd nadat we een reponse hebben ontvangen
         if (response.success) {
           this.bookCopyList = response.data;
+          console.log("bookCopyList", this.bookCopyList)
           this.bookForm.reset();
           this.onSave.emit();
           console.log(response.data);

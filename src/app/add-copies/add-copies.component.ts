@@ -14,7 +14,7 @@ import { ReadBookCopyDto } from '../../dto/ReadBookCopyDto';
 })
 export class AddCopiesComponent {
 
-  @Input() book: ReadBookDto | null = null;
+  @Input() bookAddCopy: ReadBookDto | null = null;
   @ViewChild('closeModal') closeModal?: ElementRef;
   @ViewChild('openModal') openModal?: ElementRef;
   addCopiesForm: FormGroup;
@@ -29,7 +29,7 @@ export class AddCopiesComponent {
 
   addCopies(nrCopies: number) {
     for (let i = 0; i < nrCopies; i++) {
-      this.states.push(this.formBuilder.control('Nieuw', Validators.required));
+      this.states.push(this.formBuilder.control('NIEUW', Validators.required));
     }
   }
 
@@ -45,11 +45,12 @@ export class AddCopiesComponent {
   onSubmit(): void {
     let dto = {
       states:  this.states.value,
-      bookId: this.book?.id
+      bookId: this.bookAddCopy?.id
     }
 
-    if(confirm("Weet je zeker dat je " + this.states.length + " exemplaren van het boek: '" + this.book?.title + "' wilt toevoegen?")) {
+    if(confirm("Weet je zeker dat je " + this.states.length + " exemplaren van het boek: '" + this.bookAddCopy?.title + "' wilt toevoegen?")) {
       this.bookCopyService.createBookCopy(dto).subscribe(response => {
+        console.log("request", dto);
         // Dit wordt uitgevoerd nadat we een reponse hebben ontvangen
         if (response.success) {
           this.bookCopyList = response.data;
