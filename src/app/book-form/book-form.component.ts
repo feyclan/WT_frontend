@@ -68,15 +68,12 @@ export class BookFormComponent {
     dto.authors = this.bookForm.value.authors;
     dto.categories = this.bookForm.value.categories;
     dto.states = this.bookForm.value.states;
-    console.log(dto);
 
     if(confirm("Weet je zeker dat je " + this.states.length + " exemplaren van het boek: '" + this.bookForm.value.title + "' wilt toevoegen?")) {
       this.bookService.addBook(dto).subscribe(response => {
-        console.log('response', response);
         // Dit wordt uitgevoerd nadat we een reponse hebben ontvangen
         if (response.success) {
           this.bookCopyList = response.data;
-          console.log("bookCopyList", this.bookCopyList)
           this.bookForm.reset();
           this.onSave.emit();
           console.log(response.data);

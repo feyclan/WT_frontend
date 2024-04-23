@@ -40,4 +40,10 @@ export class BookComponent {
     }
   }
 
+  hasAddBookCopyPermission() {
+    let role = localStorage.getItem('WT_ROLE');
+
+    return !!role && role == 'TRAINER';
+
+  }
 }
