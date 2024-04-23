@@ -1,33 +1,23 @@
-<!-- <button type="button" class="list-group-item list-group-item-action" (click)="gotoBookDetailPage(book)">
-    <div>
-        <img class="bookCover" src="assets/imgs/bookCover.png"/>
+<div class="card flex-row">
+  <img
+    class="card-img-left example-card-img-responsive"
+    src="assets/imgs/bookCover.png"
+  />
+  <div class="card-body">
+    <button
+      id="title"
+      class="card-title h5 h4-sm"
+      (click)="gotoBookDetailPage(book)"
+    >
+      {{ book?.title }}
+    </button>
+    <h6
+      class="card-subtitle mb-2 text-muted"
+      *ngFor="let item of book?.authors"
+    >
+      {{ item }}
+    </h6>
+    <p class="card-text">{{ book?.description }}</p>
+      <app-add-copies *ngIf="hasAddBookCopyPermission()" [bookAddCopy]="book"></app-add-copies>
     </div>
-    <h1>{{book?.title}}</h1>
-    <h2>{{book?.authors}}</h2><br>
-    <p>{{book?.description}}</p>
-</button> -->
-
-<!-- <div class="card">
-    <img class="card-img-left" src="assets/imgs/bookCover.png" alt="Card image cap">
-    <div class="card-body">
-      <h5 class="card-title">{{book?.title}}</h5>
-      <h6 class="card-subtitle mb-2 text-muted" *ngFor="let item of book?.authors">{{item}}<br></h6>
-      <p class="card-text">{{book?.description}}</p>
-    </div> -->
-
-    <div class="card flex-row"><img class="card-img-left example-card-img-responsive" src="assets/imgs/bookCover.png"/>
-        <div class="card-body">
-          <button id="title" class="card-title h5 h4-sm" (click)="gotoBookDetailPage(book)">{{book?.title}}</button>
-          <h6 class="card-subtitle mb-2 text-muted" *ngFor="let item of book?.authors">{{item}}</h6>
-          <p class="card-text">{{book?.description}}</p>
-          <div class="dropdown position-absolute top-0 end-0">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Options
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-              <button class="dropdown-item" type="button">Edit</button>
-              <button class="dropdown-item" type="button" (click)="deleteBook()">Delete</button>
-            </div>
-          </div>
-        </div>
-      </div>
+  </div>
