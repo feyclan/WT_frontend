@@ -2,5 +2,35 @@
 <td><a href="book/{{book?.id}}">{{book?.title}}</a></td>
 <td>{{loan?.startDate}}</td>
 <td *ngIf="loan?.endDate != null && !isReservationList">{{loan?.endDate}}</td>
-<td *ngIf="isReservationList"><button type="button" class="btn btn-success">Innemen</button></td>
+<td *ngIf="isReservationList"><button type="button" class="btn btn-success" (click)="openConditionModal(conditionModalContent)">Innemen</button></td>
 <td *ngIf="loan?.endDate != null && !isReservationList"><button type="button" class="btn btn-dark" disabled>Schrijf een review</button></td>
+
+<!-- Modal -->
+<ng-template #conditionModalContent let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">{{ modalTitle }}</h4>
+    </div>
+    <div class="modal-body">
+      <form [formGroup]="innemenForm">
+        <div class="form-group">
+          <label for="conditionEnd">Conditie:</label>
+          <select formControlName="conditionEnd" class="form-control" id="conditionEnd">
+            <option value="" disabled selected>Selecteer een conditie</option>
+            <option value="NIEUW">Nieuw</option>
+            <option value="GOED">Goed</option>
+            <option value="GEMIDDELD">Gemiddeld</option>
+            <option value="SLECHT">Slecht</option>
+            <option value="ONBRUIKBAAR">Onbruikbaar</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="endDate">Datum:</label>
+          <input formControlName="endDate" class="form-control" type="date" id="endDate">
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" (click)="modal.dismiss('cancel')">Cancel</button>
+      <button type="button" class="btn btn-primary" (click)="modal.close('save')" [disabled]="innemenForm.invalid">Opslaan</button>
+    </div>
+  </ng-template>
