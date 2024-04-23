@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, output } from '@angular/core';
 import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { UserService } from '../user.service';
+import { ResponseDto } from '../../dto/ResponseDto';
 
 @Component({
   selector: 'app-registration',
@@ -67,11 +68,14 @@ export class RegistrationComponent {
       password: this.registrationForm.value.password,
       role: this.registrationForm.value.role
     }
-    this.userService.addUser(dto).subscribe(() => {
-      alert("User is aangemaakt");
-      console.log(dto);
-      this.registrationForm.reset();
-      this.onSave.emit();
+    this.userService.addUser(dto).subscribe((response: ResponseDto) => {
+      if(response.success){
+        alert("User is aangemaakt.");
+        this.registrationForm.reset();
+        this.onSave.emit();
+      } else {
+        alert("User aanmaken mislukt.");
+      }      
 
     })
 
