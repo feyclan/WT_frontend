@@ -15,17 +15,21 @@ import { BookComponent } from '../book/book.component';
 export class CatalogueComponent implements OnInit {
 
   books = new Array<ReadBookDto>();
-  page: number = 0;
+  totalPages: number = 0;
+  currentPage: number = 1;
+  totalPagesArray: number[] = [];
   constructor(private bookService: BookService) {}
 
   ngOnInit(): void {
-    this.loadBooks();
+    this.loadBooks(1);
   }
 
-  loadBooks() {
-    this.bookService.getBooks(this.page).subscribe((response) => {
+  loadBooks(pageNr: number) {
+    this.bookService.getBooks(pageNr - 1).subscribe((response) => {
       console.log(response);
       this.books = response.data.books;
+      this.totalPages = response.data.totalPages;
+      this.totalPagesArray = Array.from({ length: this.totalPages }, (_, i) => i + 1);
     });
   }
 
@@ -33,6 +37,15 @@ export class CatalogueComponent implements OnInit {
     let role = localStorage.getItem('WT_ROLE');
 
     return !!role && role == 'TRAINER';
+  }
+
+  setPage(page: number){
+    if(page < 1 || page > this.totalPages){
+      return;
+    }
+
+    this.currentPage = page;
+    this.loadBooks(page);
   }
 
 }

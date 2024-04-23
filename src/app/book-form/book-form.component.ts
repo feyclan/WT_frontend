@@ -68,6 +68,10 @@ export class BookFormComponent {
     dto.authors = this.bookForm.value.authors;
     dto.categories = this.bookForm.value.categories;
     dto.states = this.bookForm.value.states;
+
+    for (let index = 0; index < dto.states.length; index++) {
+      dto.states[index] = dto.states[index].toUpperCase();      
+    }
     console.log(dto);
 
     if(confirm("Weet je zeker dat je " + this.states.length + " exemplaren van het boek: '" + this.bookForm.value.title + "' wilt toevoegen?")) {
