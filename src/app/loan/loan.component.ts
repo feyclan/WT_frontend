@@ -4,6 +4,7 @@ import { ReadBookDto } from '../../dto/ReadBookDto';
 import { ReadUserDto } from '../../dto/ReadUserDto';
 import { UserService } from '../user.service';
 import { BookCopyService } from '../bookCopy.service';
+import { BookService } from '../book.service';
 import { ReadBookCopyDto } from '../../dto/ReadBookCopyDto';
 import { CommonModule } from '@angular/common';
 
@@ -26,7 +27,8 @@ export class LoanComponent {
   // All services needed to access the proper end points
   constructor(
     private bookCopyService: BookCopyService,
-    private userService: UserService
+    private userService: UserService,
+    private bookService: BookService
   ) { }
 
   // Get all the foreign keys necessary to construct all the loan information
@@ -34,6 +36,7 @@ export class LoanComponent {
     if (this.loan) {
       this.getBookCopyById(this.loan.bookCopyId);
       this.getUserById(this.loan.userId);
+      this.getBookById(this.loan.bookId);
     }
   }
 
@@ -48,5 +51,11 @@ export class LoanComponent {
     this.userService.getUser(id).subscribe(resp => {
       this.user = resp.data;
     });
+  }
+
+  getBookById(id: any) {
+    this.bookService.getBook(id).subscribe(resp => {
+      this.book = resp.data;
+    })
   }
 }
