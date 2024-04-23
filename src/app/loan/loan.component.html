@@ -1,5 +1,6 @@
-<td>{{loan?.bookTitle}}</td>
-<td>{{loan?.bookAuthors}}</td>
+<td *ngIf="isReservationList"><a href="loans">{{user?.firstName}} {{user?.lastName}}</a></td>
+<td><a href="book/{{loan?.id}}">{{loan?.bookTitle}}</a></td>
 <td>{{loan?.startDate}}</td>
-<td *ngIf="loan?.endDate != null">{{loan?.endDate}}</td>
-<td *ngIf="loan?.endDate != null"><button type="button" class="btn btn-dark" disabled>Schrijf een review</button></td>
+<td *ngIf="loan?.endDate != null && !isReservationList">{{loan?.endDate}}</td>
+<td *ngIf="isReservationList"><button type="button" class="btn btn-success">Innemen</button></td>
+<td *ngIf="loan?.endDate != null && !isReservationList"><button type="button" class="btn btn-dark" disabled>Schrijf een review</button></td>

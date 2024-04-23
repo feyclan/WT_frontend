@@ -13,8 +13,8 @@ export class UserService {
 
   constructor(private http: HttpClient) {}
 
-  getUsers(): Observable<ResponseDto> {
-    return this.http.get<ResponseDto>("http://localhost:8080/user/all");
+  getUsers(pageNr: number): Observable<ResponseDto> {
+    return this.http.post<ResponseDto>("http://localhost:8080/user/all", pageNr);
   }
 
   getUser(id: number): Observable<ResponseDto> {
@@ -27,6 +27,10 @@ export class UserService {
 
   login(dto: LoginRequestDto): Observable<ResponseDto> {
     return this.http.post<ResponseDto>("http://localhost:8080/user/login", dto);
+  }
+
+  logout(): Observable<ResponseDto>{
+    return this.http.post<ResponseDto>("http://localhost:8080/user/logout", "");
   }
 
 }
