@@ -2,3 +2,4 @@
 <td>{{loan?.bookAuthors}}</td>
 <td>{{loan?.startDate}}</td>
 <td *ngIf="loan?.endDate != null">{{loan?.endDate}}</td>
+<td *ngIf="loan?.endDate != null"><button type="button" class="btn btn-dark">Schrijf een review</button></td>
