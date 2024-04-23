@@ -30,8 +30,6 @@ export class UserListComponent {
       this.users = response.data.users;
       this.totalPages = response.data.totalPages;
       this.totalPagesArray = Array.from({ length: this.totalPages }, (_, i) => i + 1);
-      console.log(this.users);
-      console.log("totalPages = " + this.totalPages)
     });
   }
 
@@ -42,6 +40,12 @@ export class UserListComponent {
 
     this.currentPage = page;
     this.loadUsers(page);
+  }
+
+  hasCreatePermission() {
+    let role = localStorage.getItem('WT_ROLE');
+
+    return !!role && role == 'TRAINER';
   }
 
 }
