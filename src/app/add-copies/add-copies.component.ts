@@ -4,17 +4,20 @@ import { CommonModule } from '@angular/common';
 import { BookCopyService } from '../bookCopy.service';
 import { ReadBookDto } from '../../dto/ReadBookDto';
 import { ReadBookCopyDto } from '../../dto/ReadBookCopyDto';
+import { BookComponent } from '../book/book.component';
+import { CatalogueComponent } from '../catalogue/catalogue.component';
 
 @Component({
   selector: 'app-add-copies',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, BookComponent, CatalogueComponent],
   templateUrl: './add-copies.component.html',
   styleUrl: './add-copies.component.scss'
 })
 export class AddCopiesComponent {
 
   @Input() bookAddCopy: ReadBookDto | null = null;
+
   @ViewChild('closeModal') closeModal?: ElementRef;
   @ViewChild('openModal') openModal?: ElementRef;
   addCopiesForm: FormGroup;
