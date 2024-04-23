@@ -1,4 +1,6 @@
-<td>{{book?.title}}</td>
-<td>{{book?.authors}}</td>
+<td *ngIf="isReservationList"><a href="loans">{{user?.firstName}} {{user?.lastName}}</a></td>
+<td><a href="book/{{book?.id}}">{{book?.title}}</a></td>
+<td *ngIf="!isReservationList">{{book?.authors}}</td>
 <td>{{loan?.startDate}}</td>
-<td *ngIf="loan?.endDate != null">{{loan?.endDate}}</td>
+<td *ngIf="loan?.endDate != null && !isReservationList">{{loan?.endDate}}</td>
+<td *ngIf="isReservationList"><button type="button" class="btn btn-success">Innemen</button></td>
