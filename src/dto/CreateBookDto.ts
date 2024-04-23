@@ -5,5 +5,5 @@ export class CreateBookDto {
     isbn: string = '';
     authors: [] = [];
     categories: [] = [];
-    states: [] = [];
+    states: string[] = [];
 }
