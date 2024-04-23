@@ -33,7 +33,7 @@ export class UserDetailsComponent {
     this.userId = this.activatedRoute.snapshot.params['id'];
 
     this.getUser(this.userId);
-    this.getReservations();
+    this.getReservations(this.userId);
     this.getLoans(this.userId);
   }
 
@@ -45,9 +45,15 @@ export class UserDetailsComponent {
 
   // Create endpoint to get user loans by id
   getLoans(id: number) {
+    this.loanService.getLoansByUserId(id).subscribe(resp => {
+      this.loans = resp.data;
+    })
   }
 
   // Create endpoint to get user reservations by id
-  getReservations() {
+  getReservations(id: number) {
+    this.reservationService.getReservationsByUserId(id).subscribe(resp => {
+      this.userReservations = resp.data;
+    })
   }
 }
