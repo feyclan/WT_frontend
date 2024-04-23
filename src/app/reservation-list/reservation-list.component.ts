@@ -20,7 +20,7 @@ export class ReservationListComponent {
   reservations = new Array<ReservationDto>();
   loans = new Array<LoanDto>();
 
-  constructor(private reservationService: ReservationService, private bookService: BookService, private loanService: LoanService) {}
+  constructor(private reservationService: ReservationService, private bookService: BookService, private loanService: LoanService) { }
 
   ngOnInit(): void {
     this.loadReservations();

@@ -19,6 +19,7 @@ export class LoanComponent {
 
   // Every DTO needed to construct the proper information from the root- and foreign tables
   @Input() loan: LoanDto | null = null;
+  @Input() isReservationList: boolean = false; // Input to indicate whether it's being used in the reservation list
   bookCopy: ReadBookCopyDto | null = null;
   book: ReadBookDto | null = null;
   user: ReadUserDto | null = null;
@@ -38,7 +39,7 @@ export class LoanComponent {
       this.getBookById(this.loan.bookId);
     }
   }
-  
+
   // Get all the info of the foreign tables by the provided ID
   getBookCopyById(id: any) {
     this.bookCopyService.getBookCopy(id).subscribe(resp => {

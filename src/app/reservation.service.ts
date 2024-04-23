@@ -10,7 +10,7 @@ export class ReservationService {
 
   constructor(private http: HttpClient) { }
 
-  getReservations(): Observable<ResponseDto>{
+  getReservations(): Observable<ResponseDto> {
     return this.http.get<ResponseDto>("http://localhost:8080/reservation/all");
   }
 
@@ -18,4 +18,7 @@ export class ReservationService {
     return this.http.post<ResponseDto>("http://localhost:8080/reservation/create", reservation);
   }
 
+  updateReservation(reservation: any): Observable<ResponseDto> {
+    return this.http.put<ResponseDto>("http://localhost:8080/reservation/update", reservation);
+  }
 }
