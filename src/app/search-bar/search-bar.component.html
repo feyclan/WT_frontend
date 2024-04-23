@@ -1,7 +1,9 @@
-<div class="input-group mb-3">
-    <input type="text" class="form-control" placeholder="Zoek op titel" aria-label="Search" aria-describedby="basic-addon2" 
-    [(ngModel)]="searchTerm" (input)="onSearchTermChanged()">
-    <div class="input-group-append">
-      <button class="btn btn-outline-secondary" type="button" (click)="search()">Zoek</button>
+<div class="search-container">
+    <div class="input-group mb-3">
+      <input type="text" class="form-control search-input" placeholder="Zoek op titel" aria-label="Search" aria-describedby="basic-addon2"
+        [(ngModel)]="searchTerm" (input)="onSearchTermChanged()">
+      <div class="input-group-append">
+        <button class="btn btn-outline-secondary search-button" type="button" (click)="search()">Zoek</button>
+      </div>
     </div>
   </div>
