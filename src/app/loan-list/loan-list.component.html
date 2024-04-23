@@ -1,10 +1,26 @@
 <div>
-    <h1>In Lening</h1>
+    <h1>Lening Overzicht</h1>
+    <h2>Aangevraagd</h2>
     <table class="table table-bordered">
         <thead>
             <tr>
                 <th scope="col">Boek Titel</th>
-                <th scope="col">Auteurs</th>
+                <th scope="col">Datum Aangevraagd</th>
+                <th scope="col">Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <ng-container *ngFor="let userReservation of userReservations">
+                <tr app-user-reservation [reservation]="userReservation"></tr>
+            </ng-container>
+        </tbody>
+    </table>
+
+    <h2>In Lening</h2>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th scope="col">Boek Titel</th>
                 <th scope="col">Datum Geleend</th>
             </tr>
         </thead>
@@ -15,14 +31,14 @@
         </tbody>
     </table>
 
-    <h1>Leen Geschiedenis</h1>
+    <h2>Leen Geschiedenis</h2>
     <table class="table table-bordered">
         <thead>
             <tr>
                 <th scope="col">Boek Titel</th>
-                <th scope="col">Auteurs</th>
                 <th scope="col">Datum Geleend</th>
                 <th scope="col">Datum Ingeleverd</th>
+                <th scope="col">Review Achterlaten</th>
             </tr>
         </thead>
         <tbody>
