@@ -24,6 +24,10 @@ export class BookService {
     return this.http.post<ResponseDto>("http://localhost:8080/book/create", book);
   }
 
+  searchBooks(searchDto: any): Observable<ResponseDto> {
+    return this.http.post<ResponseDto>("http://localhost:8080/book/search", searchDto);
+  }
+
   deleteBook(id: number): Observable<any> {
     return this.http.delete<any>("http://localhost:8080/books/delete/" + id);
   }
