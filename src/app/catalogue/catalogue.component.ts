@@ -29,24 +29,15 @@ export class CatalogueComponent implements OnInit {
 
 
   loadBooks(pageNr: number) {
-    if(this.searchTerm.length == 0){
-      this.bookService.getBooks(pageNr - 1).subscribe((response) => {
-        this.books = response.data.books;
-        this.totalPages = response.data.totalPages;
-        this.totalPagesArray = Array.from({ length: this.totalPages }, (_, i) => i + 1);
-      });
-    } else {
       let dto = {
         title: this.searchTerm,
-        pageNr: this.currentPage - 1
+        pageNr: pageNr - 1
       };
       this.bookService.searchBooks(dto).subscribe((response) => {
         this.books = response.data.books;
         this.totalPages = response.data.totalPages;
         this.totalPagesArray = Array.from({ length: this.totalPages }, (_, i) => i + 1);
-      }); 
-    }
-    
+      })     
   }
 
   hasCreatePermission() {
@@ -66,7 +57,6 @@ export class CatalogueComponent implements OnInit {
   }
 
   onSearch(searchTerm: string) {
-    console.log('Search term:', searchTerm);
     this.searchTerm = searchTerm;
     this.loadBooks(1);
   }

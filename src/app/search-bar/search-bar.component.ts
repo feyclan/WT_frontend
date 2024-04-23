@@ -17,7 +17,7 @@ export class SearchBarComponent {
 
   constructor() {
     this.searchTermChanged.pipe(
-      debounceTime(300) //This is the time in ms it waits to change te search term.
+      debounceTime(300) //This is the time in ms it waits to emit te search term.
     ).subscribe(searchTerm => {
       this.searchEvent.emit(searchTerm);
     });
