@@ -9,7 +9,6 @@ import { ReservationService } from '../reservation.service';
 import { BookCopyService } from '../bookCopy.service';
 import { ReadBookCopyDto } from '../../dto/ReadBookCopyDto';
 
-
 @Component({
   selector: '[app-reservation]',
   standalone: true,
@@ -50,18 +49,10 @@ export class ReservationComponent {
       this.bookCopyService.getBookCopy(this.book.id).subscribe(bookCopyResponse => {
         const bookCopyData: ReadBookCopyDto[] = bookCopyResponse.data;
 
-        // check if bookCopy is available and find first bookCopy
+        // check if bookCopy is available and find first available bookCopy
         const availableBookCopy = bookCopyData.find(copy => copy.available);
 
         if (availableBookCopy) {
-          // change reservationRequest status
-          if (this.reservation?.reservationRequest == "PENDING") {
-            this.reservation.reservationRequest = "ACCEPTED"
-            this.reservationService.updateReservation(this.reservation).subscribe(response => {
-              console.log('Reservation updated:', response);
-            });
-          }
-
           // create loan
           const loanData = {
             conditionStart: availableBookCopy.state,
@@ -73,14 +64,29 @@ export class ReservationComponent {
           };
 
           this.loanService.createLoan(loanData).subscribe(response => {
-            console.log('Loan created:', response);
-            alert("Lening aangemaakt")
+            if (response.success) {
+              console.log('response', response);
+              alert("Lening aangemaakt")
+            } else {
+              alert(response.errors)
+            }
           });
+
+          // change reservationRequest status
+          if (this.reservation?.reservationRequest == "PENDING") {
+            this.reservation.reservationRequest = "ACCEPTED"
+            this.reservationService.updateReservation(this.reservation).subscribe(response => {
+              if (response.success) {
+                console.log('response', response);
+              } else {
+                alert(response.errors);
+              }
+            });
+          }
         } else {
           alert("Geen boek kopieën beschikbaar")
         }
-      }
-      )
+      })
     }
   }
 
@@ -89,8 +95,12 @@ export class ReservationComponent {
       if (this.reservation?.reservationRequest == "PENDING") {
         this.reservation.reservationRequest = "DENIED"
         this.reservationService.updateReservation(this.reservation).subscribe(response => {
-          console.log('Reservation updated:', response);
-          alert("Aanvraag afgewezen")
+          if (response.success) {
+            console.log('response', response);
+            alert("Aanvraag afgewezen")
+          } else {
+            alert(response.errors)
+          }
         });
       }
     }

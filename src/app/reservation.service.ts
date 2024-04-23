@@ -21,8 +21,4 @@ export class ReservationService {
   updateReservation(reservation: any): Observable<ResponseDto> {
     return this.http.put<ResponseDto>("http://localhost:8080/reservation/update", reservation);
   }
-
-  deleteReservation(id: number): Observable<ResponseDto> {
-    return this.http.delete<ResponseDto>("http://localhost:8080/reservation/delete" + id);
-  }
 }
