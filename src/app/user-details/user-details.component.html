@@ -6,12 +6,13 @@
             <tr>
                 <th scope="col">Boek Titel</th>
                 <th scope="col">Datum Aangevraagd</th>
-                <th scope="col">Status</th>
+                <th scope="col">Goedkeuren</th>
+                <th scope="col">Afwijzen</th>
             </tr>
         </thead>
         <tbody>
-            <ng-container *ngFor="let userReservation of userReservations">
-                <tr app-user-reservation [reservation]="userReservation"></tr>
+            <ng-container *ngFor="let reservation of reservations">
+                <tr app-reservation [reservation]="reservation" [isUserList]="true"></tr>
             </ng-container>
         </tbody>
     </table>

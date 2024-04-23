@@ -8,16 +8,18 @@ import { LoanService } from '../loan.service';
 import { ReservationService } from '../reservation.service';
 import { BookCopyService } from '../bookCopy.service';
 import { ReadBookCopyDto } from '../../dto/ReadBookCopyDto';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: '[app-reservation]',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './reservation.component.html',
   styleUrl: './reservation.component.scss'
 })
 export class ReservationComponent {
   @Input() reservation: ReservationDto | null = null;
+  @Input() isUserList = false;
   book: ReadBookDto | null = null;
   user: ReadUserDto | null = null;
 

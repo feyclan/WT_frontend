@@ -6,14 +6,14 @@ import { UserService } from '../user.service';
 import { LoanService } from '../loan.service';
 import { ReservationService } from '../reservation.service';
 import { LoanComponent } from '../loan/loan.component';
-import { UserReservationComponent } from '../user-reservation/user-reservation.component';
 import { LoanDto } from '../../dto/ReadLoanDto';
 import { ReservationDto } from '../../dto/ReadReservationDto';
+import { ReservationComponent } from '../reservation/reservation.component';
 
 @Component({
   selector: 'app-user-details',
   standalone: true,
-  imports: [CommonModule, LoanComponent, UserReservationComponent],
+  imports: [CommonModule, LoanComponent, ReservationComponent],
   templateUrl: './user-details.component.html',
   styleUrl: './user-details.component.scss'
 })
@@ -21,7 +21,7 @@ export class UserDetailsComponent {
   @Input() user: ReadUserDto | null = null;
   userId: number | 0 = 0;
   loans = new Array<LoanDto>();
-  userReservations = new Array<ReservationDto>();
+  reservations = new Array<ReservationDto>();
 
   // Get the user by reading the param from the url
   constructor(
@@ -53,7 +53,7 @@ export class UserDetailsComponent {
   // Create endpoint to get user reservations by id
   getReservations(id: number) {
     this.reservationService.getReservationsByUserId(id).subscribe(resp => {
-      this.userReservations = resp.data;
+      this.reservations = resp.data;
     })
   }
 }

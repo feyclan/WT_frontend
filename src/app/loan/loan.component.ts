@@ -26,7 +26,7 @@ export class LoanComponent {
   // All services needed to access the proper end points
   constructor(
     private bookCopyService: BookCopyService,
-    private userService: UserService
+    private userService: UserService,
   ) { }
 
   // Get all the foreign keys necessary to construct all the loan information
