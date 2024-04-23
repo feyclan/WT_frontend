@@ -4,11 +4,12 @@ import { ReadUserDto } from '../../dto/ReadUserDto';
 import { UserService } from '../user.service';
 import { RegistrationComponent } from '../registration/registration.component';
 import { CommonModule } from '@angular/common';
+import { SearchBarComponent } from '../search-bar/search-bar.component';
 
 @Component({
   selector: 'app-user-list',
   standalone: true,
-  imports: [UserComponent, RegistrationComponent,CommonModule],
+  imports: [UserComponent, RegistrationComponent,CommonModule,SearchBarComponent],
   templateUrl: './user-list.component.html',
   styleUrl: './user-list.component.scss'
 })
@@ -18,6 +19,7 @@ export class UserListComponent {
   totalPages : number = 0;
   currentPage: number = 1;
   totalPagesArray: number[] = [];
+  searchTerm: String = "";
 
   constructor(private userService: UserService) {}
 
@@ -26,10 +28,15 @@ export class UserListComponent {
   }
 
   loadUsers(pageNr: number) {
-    this.userService.getUsers(pageNr-1).subscribe((response) => {
+    let dto = {
+      fullName: this.searchTerm,
+      pageNr: pageNr - 1
+    };
+    this.userService.searchUser(dto).subscribe((response) => {
       this.users = response.data.users;
       this.totalPages = response.data.totalPages;
       this.totalPagesArray = Array.from({ length: this.totalPages }, (_, i) => i + 1);
+      this.currentPage = pageNr;
     });
   }
 
@@ -46,6 +53,11 @@ export class UserListComponent {
     let role = localStorage.getItem('WT_ROLE');
 
     return !!role && role == 'TRAINER';
+  }
+
+  onSearch(searchTerm: string) {
+    this.searchTerm = searchTerm;
+    this.loadUsers(1);
   }
 
 }
