@@ -14,6 +14,10 @@ export class ReservationService {
     return this.http.get<ResponseDto>("http://localhost:8080/reservation/all");
   }
 
+  getUserReservations(): Observable<ResponseDto>{
+    return this.http.get<ResponseDto>("http://localhost:8080/reservation/user/all");
+  }
+
   addReservation(reservation: any): Observable<ResponseDto> {
     return this.http.post<ResponseDto>("http://localhost:8080/reservation/create", reservation);
   }
