@@ -37,6 +37,7 @@ export class CatalogueComponent implements OnInit {
         this.books = response.data.books;
         this.totalPages = response.data.totalPages;
         this.totalPagesArray = Array.from({ length: this.totalPages }, (_, i) => i + 1);
+        this.currentPage = pageNr;
       })     
   }
 
