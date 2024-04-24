@@ -7,4 +7,5 @@ export class ReadBookDto {
     copyCount: number = 0;
     publishingDate: Date | null = null;
     authors: [] = [];
+    availableCopyCount: number = 0;
 }

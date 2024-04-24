@@ -37,9 +37,13 @@
         <th scope="row">ISBN</th>
         <td>{{ book?.isbn }}</td>
       </tr>
-      <tr>
+      <tr *ngIf="!!role && role == 'TRAINER'">
         <th scope="row">Aantal kopieën</th>
         <td>{{ book?.copyCount }}</td>
+      </tr>
+      <tr>
+        <th scope="row">Aantal beschikbare kopieën</th>
+        <td>{{ book?.availableCopyCount }}</td>
       </tr>
     </tbody>
   </table>
