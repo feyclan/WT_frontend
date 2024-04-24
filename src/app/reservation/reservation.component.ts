@@ -42,6 +42,12 @@ export class ReservationComponent {
     });
   }
 
+  reloadPage() {
+    setTimeout(() => {
+      window.location.reload()
+    }, 500);
+  }
+
   acceptReservation() {
     if (this.reservation && this.book && this.user) {
 
