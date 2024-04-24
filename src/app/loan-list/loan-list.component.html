@@ -12,8 +12,8 @@
             </tr>
         </thead>
         <tbody>
-            <ng-container *ngFor="let userReservation of userReservations">
-                <tr app-user-reservation [reservation]="userReservation"></tr>
+            <ng-container *ngFor="let reservation of reservations">
+                <tr app-reservation [reservation]="reservation"></tr>
             </ng-container>
         </tbody>
     </table>
@@ -24,11 +24,12 @@
             <tr>
                 <th scope="col">Boek Titel</th>
                 <th scope="col">Datum Geleend</th>
+                <th *ngIf="role === 'TRAINER'" scope="col">Innemen</th>
             </tr>
         </thead>
         <tbody>
             <ng-container *ngFor="let loan of loans">
-                <tr *ngIf="loan.isActive" app-loan [loan]="loan"></tr>
+                <tr *ngIf="loan.isActive" app-loan [loan]="loan" [trainerView]="true"></tr>
             </ng-container>
         </tbody>
     </table>
