@@ -1,4 +1,4 @@
-<td *ngIf="isReservationList"><a href="loans">{{user?.firstName}} {{user?.lastName}}</a></td>
+<td *ngIf="isReservationList"><a href="user/{{user?.id}}">{{user?.firstName}} {{user?.lastName}}</a></td>
 <td><a href="book/{{book?.id}}">{{book?.title}}</a></td>
 <td>{{loan?.startDate}}</td>
 <td *ngIf="loan?.endDate != null && !isReservationList">{{loan?.endDate}}</td>
