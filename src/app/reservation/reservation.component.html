@@ -3,9 +3,8 @@
 <td><a href="book/{{book?.id}}">{{book?.title}}</a></td>
 <td>{{reservation?.requestDate}}</td>
 <td>{{reservation?.reservationRequest}}</td>
-<!-- Afhankelijk van de status wil ik deze buttons disabled maken-->
-<td><button [disabled]="reservation?.reservationRequest !== 'PENDING'" type="button" class="btn btn-success" (click)="acceptReservation()" (click)="reloadPage()">Goedkeuren</button></td>
-<td><button [disabled]="reservation?.reservationRequest !== 'PENDING'" type="button" class="btn btn-danger" (click)="denyReservation()">Afwijzen</button></td>
+<td *ngIf="role === 'TRAINER'"><button [disabled]="reservation?.reservationRequest !== 'PENDING'" type="button" class="btn btn-success" (click)="acceptReservation()" (click)="reloadPage()">Goedkeuren</button></td>
+<td *ngIf="role === 'TRAINER'"><button [disabled]="reservation?.reservationRequest !== 'PENDING'" type="button" class="btn btn-danger" (click)="denyReservation()">Afwijzen</button></td>
 
 <!-- TODO: check of reservations ook goed gaat-->
 <!-- TODO: check of het goed gaat met de verschillende rollen-->

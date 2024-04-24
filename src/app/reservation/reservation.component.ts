@@ -9,6 +9,7 @@ import { ReservationService } from '../reservation.service';
 import { BookCopyService } from '../bookCopy.service';
 import { ReadBookCopyDto } from '../../dto/ReadBookCopyDto';
 import { CommonModule } from '@angular/common';
+import { DataSharingService } from '../data-sharing.service';
 
 @Component({
   selector: '[app-reservation]',
@@ -22,14 +23,27 @@ export class ReservationComponent {
   @Input() isUserList = false;
   book: ReadBookDto | null = null;
   user: ReadUserDto | null = null;
+  role: string | null = null;
 
-  constructor(private bookService: BookService, private userService: UserService, private loanService: LoanService, private bookCopyService: BookCopyService, private reservationService: ReservationService) { }
+  constructor(
+    private bookService: BookService,
+    private userService: UserService,
+    private loanService: LoanService,
+    private bookCopyService: BookCopyService,
+    private reservationService: ReservationService,
+    private dataSharingService: DataSharingService
+  ) { }
 
   ngOnInit(): void {
     if (this.reservation) {
       this.getBookById(this.reservation.bookId);
       this.getUserById(this.reservation.userId);
     }
+
+    // Get the role of the current user
+    this.dataSharingService.userChangeObservable.subscribe(() => {
+      this.role = localStorage.getItem('WT_ROLE');
+    })
   }
 
   getBookById(id: number) {
