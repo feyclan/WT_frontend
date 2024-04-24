@@ -18,7 +18,6 @@ export class CatalogueComponent implements OnInit {
   books = new Array<ReadBookDto>();
   totalPages: number = 0;
   currentPage: number = 1;
-  totalPagesArray: number[] = [];
   constructor(private bookService: BookService) {}
 
   ngOnInit(): void {
@@ -30,7 +29,6 @@ export class CatalogueComponent implements OnInit {
     this.bookService.getBooks(pageNr - 1).subscribe((response) => {
       this.books = response.data.books;
       this.totalPages = response.data.totalPages;
-      this.totalPagesArray = Array.from({ length: this.totalPages }, (_, i) => i + 1);
     });
   }
 
@@ -47,6 +45,18 @@ export class CatalogueComponent implements OnInit {
 
     this.currentPage = page;
     this.loadBooks(page);
+  }
+
+  get visiblePages(): number[] {
+    const totalPagesToShow = 5; 
+    const startPage = Math.max(1, this.currentPage - 2);
+    const endPage = Math.min(this.totalPages, startPage + totalPagesToShow - 1);
+
+    const pages = [];
+    for (let i = startPage; i <= endPage; i++) {
+      pages.push(i);
+    }
+    return pages;
   }
 
 }
