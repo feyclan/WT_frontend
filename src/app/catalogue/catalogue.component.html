@@ -1,17 +1,28 @@
-<!-- <div class="position-absolute start-50 translate-middle-x w-75" id="outer">
-    <h1 id="header">Catalogue</h1>
-    <div class="list-group">
-        @for (book of books; track book) {
-        <app-book [book]="book"></app-book>
-        }
-    </div>
-</div> -->
-
 
 <div class="card-deck w-75">
     @for (book of books; track book) {
-        <app-book (onDelete)="loadBooks()" [book]="book"></app-book>
+        <app-book (onDelete)="loadBooks(currentPage)" [book]="book"></app-book>
         }
 </div>
 
-<app-book-form *ngIf="hasCreatePermission()" (onSave)="loadBooks()"></app-book-form>
+<div class="text-center mt-3 mt-sm-3">
+    <ul class="pagination justify-content-center mb-0">
+      <li class="page-item" [class.disabled]="currentPage === 1">
+        <a class="page-link" (click)="setPage(currentPage - 1)" aria-label="Previous">
+          <span aria-hidden="true">&laquo;</span>
+          <span class="sr-only" style="cursor: pointer;">Vorige</span>
+        </a>
+      </li>
+      <li class="page-item" *ngFor="let page of totalPagesArray" [class.active]="page === currentPage">
+        <a class="page-link" (click)="setPage(page)" style="cursor: pointer;">{{ page }}</a>
+      </li>
+      <li class="page-item" [class.disabled]="currentPage === totalPages">
+        <a class="page-link" (click)="setPage(currentPage + 1)" aria-label="Next">
+          <span aria-hidden="true">&raquo;</span>
+          <span class="sr-only" style="cursor: pointer;">Volgende</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+<app-book-form *ngIf="hasCreatePermission()" (onSave)="loadBooks(currentPage)"></app-book-form>
