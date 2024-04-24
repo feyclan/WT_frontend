@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Subject, debounceTime } from 'rxjs';
 
@@ -12,6 +12,7 @@ import { Subject, debounceTime } from 'rxjs';
 export class SearchBarComponent {
   searchTerm: string = '';
   searchTermChanged: Subject<string> = new Subject<string>();
+  @Input() placeholderText: string = "";
   //The search term is emitted to the parent component
   @Output() searchEvent = new EventEmitter<string>();
 

@@ -21,6 +21,7 @@ export class CatalogueComponent implements OnInit {
   currentPage: number = 1;
   totalPagesArray: number[] = [];
   searchTerm: string = "";
+  searchPlaceholder: string = "Zoek op titel";
   constructor(private bookService: BookService) {}
 
   ngOnInit(): void {

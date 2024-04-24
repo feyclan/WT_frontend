@@ -20,6 +20,7 @@ export class UserListComponent {
   currentPage: number = 1;
   totalPagesArray: number[] = [];
   searchTerm: String = "";
+  searchPlaceholder: string = "Zoek op naam";
 
   constructor(private userService: UserService) {}
 
