@@ -3,6 +3,8 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { BookService } from '../book.service';
 import { ReservationService } from '../reservation.service';
+import { ReadBookDto } from '../../dto/ReadBookDto';
+import { DataSharingService } from '../data-sharing.service';
 
 @Component({
   selector: 'app-book-details',
@@ -14,16 +16,24 @@ import { ReservationService } from '../reservation.service';
 export class BookDetailsComponent {
 
   id: number = 0;
-  book: any;
+  book: ReadBookDto | null = null;
+  role: string | null = null;
 
   // Activated route is de huidige route
-  constructor(private activatedRoute: ActivatedRoute, private bookService: BookService, private reservationService: ReservationService) {
+  constructor(private activatedRoute: ActivatedRoute, private bookService: BookService, private reservationService: ReservationService,
+    private dataSharingService: DataSharingService ) {
     // Hiermee lezen we de :id uit de routing
     this.id = this.activatedRoute.snapshot.params['id'];
 
-    console.log('this.id', this.id);
+    
 
     this.loadBook();
+  }
+
+  ngOnInit() {
+    this.dataSharingService.userChangeObservable.subscribe(() => {
+          this.role = localStorage.getItem('WT_ROLE');
+    })
   }
 
   loadBook() {
