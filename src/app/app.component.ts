@@ -8,6 +8,7 @@ import { UserListComponent } from './user-list/user-list.component';
 import { UserComponent } from './user/user.component';
 import { ReservationListComponent } from './reservation-list/reservation-list.component';
 import { ReservationComponent } from './reservation/reservation.component';
+import { SearchBarComponent } from './search-bar/search-bar.component';
 
 @Component({
   selector: 'app-root',
@@ -21,7 +22,8 @@ import { ReservationComponent } from './reservation/reservation.component';
     UserListComponent,
     UserComponent,
     ReservationListComponent,
-    ReservationComponent
+    ReservationComponent,
+    SearchBarComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
