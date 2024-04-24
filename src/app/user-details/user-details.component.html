@@ -12,7 +12,8 @@
         </thead>
         <tbody>
             <ng-container *ngFor="let reservation of reservations">
-                <tr app-reservation [reservation]="reservation" [isUserList]="true"></tr>
+                <tr *ngIf="reservation.reservationRequest === 'PENDING'" app-reservation [reservation]="reservation"
+                    [isUserList]="true"></tr>
             </ng-container>
         </tbody>
     </table>
