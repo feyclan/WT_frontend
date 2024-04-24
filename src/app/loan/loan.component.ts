@@ -40,7 +40,6 @@ export class LoanComponent {
   ) {
     this.innemenForm = this.formBuilder.group({
       conditionEnd: ['', Validators.required],
-      endDate: ['', Validators.required]
     });
   }
 
@@ -50,6 +49,11 @@ export class LoanComponent {
       this.getBookCopyById(this.loan.bookCopyId);
       this.getUserById(this.loan.userId);
       this.getBookById(this.loan.bookId);
+
+      // default condition is conditionStart
+      this.innemenForm.patchValue({
+        conditionEnd: this.loan.conditionStart,
+      });
     }
   }
 
@@ -79,7 +83,7 @@ export class LoanComponent {
 
         if (this.loan) {
           this.loan.conditionEnd = this.innemenForm.value.conditionEnd;
-          this.loan.endDate = this.innemenForm.value.endDate;
+          this.loan.endDate = new Date();
           this.loan.isActive = false;
 
           this.loanService.updateLoan(this.loan).subscribe(response => {
