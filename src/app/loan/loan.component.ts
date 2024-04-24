@@ -76,7 +76,7 @@ export class LoanComponent {
   openConditionModal(content: any) {
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
       if (result === 'save') {
-        // change endcondition
+
         if (this.loan) {
           this.loan.conditionEnd = this.innemenForm.value.conditionEnd;
           this.loan.endDate = this.innemenForm.value.endDate;
@@ -85,6 +85,7 @@ export class LoanComponent {
           this.loanService.updateLoan(this.loan).subscribe(response => {
             if (response.success) {
               console.log('response', response);
+              alert("Boek ingenomen")
             } else {
               alert(response.errors);
             }
