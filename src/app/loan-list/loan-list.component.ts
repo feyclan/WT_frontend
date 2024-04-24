@@ -18,6 +18,7 @@ import { ReservationComponent } from '../reservation/reservation.component';
 })
 export class LoanListComponent {
   role: string | null = null;
+  name: string | null = null;
   loans = new Array<LoanDto>();
   reservations = new Array<ReservationDto>();
 
@@ -31,9 +32,10 @@ export class LoanListComponent {
     this.loadUserLoans();
     this.loadUserReservations();
 
-    // Get the role of the current user
+    // Get the role and name of the current user
     this.dataSharingService.userChangeObservable.subscribe(() => {
       this.role = localStorage.getItem('WT_ROLE');
+      this.name = localStorage.getItem('WT_NAME');
     })
   }
 

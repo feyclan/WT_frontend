@@ -62,8 +62,6 @@ export class LoanComponent {
 
     // Get the role of the current user
     this.dataSharingService.userChangeObservable.subscribe(() => {
-      console.log('NAVBAR: User has changed');
-
       this.role = localStorage.getItem('WT_ROLE');
     })
   }
