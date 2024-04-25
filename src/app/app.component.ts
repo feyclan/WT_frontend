@@ -9,6 +9,8 @@ import { UserComponent } from './user/user.component';
 import { ReservationListComponent } from './reservation-list/reservation-list.component';
 import { ReservationComponent } from './reservation/reservation.component';
 import { SearchBarComponent } from './search-bar/search-bar.component';
+import { BookCopyListComponent } from './book-copy-list/book-copy-list.component';
+import { BookCopyDetailsComponent } from './book-copy-details/book-copy-details.component';
 
 @Component({
   selector: 'app-root',
@@ -23,7 +25,9 @@ import { SearchBarComponent } from './search-bar/search-bar.component';
     UserComponent,
     ReservationListComponent,
     ReservationComponent,
-    SearchBarComponent
+    SearchBarComponent,
+    BookCopyListComponent,
+    BookCopyDetailsComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'

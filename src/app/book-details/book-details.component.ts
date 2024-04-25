@@ -1,6 +1,6 @@
 import { CommonModule, NgFor } from '@angular/common';
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { BookService } from '../book.service';
 import { ReservationService } from '../reservation.service';
 import { ReadBookDto } from '../../dto/ReadBookDto';
@@ -21,7 +21,7 @@ export class BookDetailsComponent {
 
   // Activated route is de huidige route
   constructor(private activatedRoute: ActivatedRoute, private bookService: BookService, private reservationService: ReservationService,
-    private dataSharingService: DataSharingService ) {
+    private dataSharingService: DataSharingService, private router: Router) {
     // Hiermee lezen we de :id uit de routing
     this.id = this.activatedRoute.snapshot.params['id'];
 
@@ -60,5 +60,14 @@ export class BookDetailsComponent {
         console.log(response);
       }
     })
+  }
+
+  goToBookCopyList(book: ReadBookDto | null) {
+    if (!!book) {
+      // Routing naar detail pagina
+      this.router.navigateByUrl('bookCopies/' + book.id);
+
+      // window.location.href = '';
+    }
   }
 }

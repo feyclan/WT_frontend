@@ -43,7 +43,7 @@
       </tr>
       <tr *ngIf="!!role && role == 'TRAINER'">
         <th scope="row">Aantal kopieën</th>
-        <td>{{ book?.copyCount }}</td>
+        <td>{{ book?.copyCount }} <button type="button" class="btn btn-success" (click)="goToBookCopyList(book)">Bekijk kopieën</button></td>
       </tr>
       <tr>
         <th scope="row">Aantal beschikbare kopieën</th>

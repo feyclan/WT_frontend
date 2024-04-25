@@ -1,0 +1,15 @@
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Conditie</th>
+            <th scope="col">Beschikbaarheid</th>
+            <th scope="col">Locatie</th>
+        </tr>
+    </thead>
+    <tbody>
+        <ng-container *ngFor="let bookCopy of bookCopies">
+            <tr app-book-copy-details [bookCopy]="bookCopy"></tr>
+        </ng-container>
+    </tbody>
+</table>
