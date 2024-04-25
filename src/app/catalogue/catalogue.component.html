@@ -1,4 +1,4 @@
-<app-search-bar (searchEvent)="onSearch($event)" [placeholderText]="searchPlaceholder"></app-search-bar>
+<app-search-bar class="searchBar" (searchEvent)="onSearch($event)" [placeholderText]="searchPlaceholder"></app-search-bar>
 
 <div class="card-deck w-75">
     @for (book of books; track book) {

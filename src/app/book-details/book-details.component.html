@@ -34,6 +34,16 @@
         <td>{{ book?.description }}</td>
       </tr>
       <tr>
+        <th scope="row">Categorie</th>
+        <td>
+          <span>
+            <ng-container *ngFor="let item of book?.categories">
+              {{ item }} <br>
+            </ng-container>
+          </span>
+        </td>
+      </tr>
+      <tr>
         <th scope="row">Publicatie datum</th>
         <td>{{ book?.publishingDate }}</td>
       </tr>
@@ -43,7 +53,7 @@
       </tr>
       <tr *ngIf="!!role && role == 'TRAINER'">
         <th scope="row">Aantal kopieën</th>
-        <td>{{ book?.copyCount }}</td>
+        <td>{{ book?.copyCount }} <button type="button" class="btn btn-success" (click)="goToBookCopyList(book)">Bekijk kopieën</button></td>
       </tr>
       <tr>
         <th scope="row">Aantal beschikbare kopieën</th>

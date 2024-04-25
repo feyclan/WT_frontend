@@ -1,10 +1,3 @@
-// .navbar {
-//     position: fixed;
-//     top: 0;
-//     left: 0;
-//     width: 100%;
-// }
-
 .nav-link {
     font-family: euclid-bold;
     color: black;
@@ -24,4 +17,14 @@
 
 .uitloggen:hover {
     color: red;
+}
+
+#logout {
+    position: absolute;
+    right: 0;
+}
+
+#name {
+    position: absolute;
+    right: 100px;
 }
