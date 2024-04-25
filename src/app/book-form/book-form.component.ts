@@ -26,7 +26,7 @@ export class BookFormComponent {
         description: new FormControl('', [Validators.required]),
         isbn: new FormControl(''),
         publishingDate: new FormControl('', [Validators.required]),
-        categories: new FormArray([]),
+        categories: new FormArray([], Validators.required),
         states: new FormArray([], Validators.required),
         nrCopies: new FormControl(''),
       }
