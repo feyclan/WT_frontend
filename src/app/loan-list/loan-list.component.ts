@@ -36,8 +36,6 @@ export class LoanListComponent {
     // Get user id from the url
     this.userId = this.activatedRoute.snapshot.params['id'];
 
-    console.log("userid", this.userId);
-
     if (this.userId) {
       this.getUser(this.userId);
       this.getReservationsById(this.userId);

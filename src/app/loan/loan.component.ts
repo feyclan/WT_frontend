@@ -85,6 +85,13 @@ export class LoanComponent {
     })
   }
 
+  // Reload the page to update the loan table after an action has been done
+  reloadPage() {
+    setTimeout(() => {
+      window.location.reload()
+    }, 500);
+  }
+
   // Open modal for boek innemen
   openConditionModal(content: any) {
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {

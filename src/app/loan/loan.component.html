@@ -26,6 +26,6 @@
     </div>
     <div class="modal-footer">
       <button type="button" class="btn btn-secondary" (click)="modal.dismiss('cancel')">Cancel</button>
-      <button type="button" class="btn btn-primary" (click)="modal.close('save')" [disabled]="innemenForm.invalid">Opslaan</button>
+      <button type="button" class="btn btn-primary" (click)="modal.close('save')" [disabled]="innemenForm.invalid" (click)="reloadPage()">Opslaan</button>
     </div>
   </ng-template>
