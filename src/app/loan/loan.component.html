@@ -3,7 +3,6 @@
 <td>{{loan?.startDate}}</td>
 <td *ngIf="loan?.endDate != null && !isReservationList">{{loan?.endDate}}</td>
 <td *ngIf="isReservationList || role === 'TRAINER' && loan?.isActive"><button type="button" class="btn btn-success" (click)="openConditionModal(conditionModalContent)">Innemen</button></td>
-<td *ngIf="loan?.isActive === false && !isReservationList"><button type="button" class="btn btn-dark" disabled>Schrijf een review</button></td>
 
 <!-- Modal -->
 <ng-template #conditionModalContent let-modal>
