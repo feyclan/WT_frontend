@@ -1,3 +1,20 @@
+.nav-link {
+    font-family: euclid-bold;
+    color: black;
+}
+
+.nav-link:hover {
+    color: var(--grijs2);
+}
+
+.navbar-nav {
+    gap: 10px;
+}
+
+.uitloggen:hover {
+    color: red;
+}
+
 #logout {
     position: absolute;
     right: 0;
