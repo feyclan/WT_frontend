@@ -1,23 +1,21 @@
 <div class="card flex-row">
-  <img
-    class="card-img-left example-card-img-responsive"
-    src="assets/imgs/bookCover.png"
-  />
+  <img *ngIf="book?.imageLink; else defaultImage" class="card-img-left example-card-img-responsive"
+    [src]="book?.imageLink" 
+    alt="Image of {{book?.title}}"
+    />
+
   <div class="card-body">
-    <button
-      id="title"
-      class="card-title h5 h4-sm"
-      (click)="gotoBookDetailPage(book)"
-    >
+    <button id="title" class="card-title h5 h4-sm" (click)="gotoBookDetailPage(book)">
       {{ book?.title }}
     </button>
-    <h6
-      class="card-subtitle mb-2 text-muted"
-      *ngFor="let item of book?.authors"
-    >
+    <h6 class="card-subtitle mb-2 text-muted" *ngFor="let item of book?.authors">
       {{ item }}
     </h6>
     <p class="card-text">{{ book?.description }}</p>
-      <app-add-copies *ngIf="hasAddBookCopyPermission()" [bookAddCopy]="book"></app-add-copies>
-    </div>
+    <app-add-copies *ngIf="hasAddBookCopyPermission()" [bookAddCopy]="book" />
   </div>
+</div>
+
+<ng-template #defaultImage>
+  <img src="assets/imgs/bookCover.png" alt="Default Image" class="card-img-left example-card-img-responsive" />
+</ng-template>
