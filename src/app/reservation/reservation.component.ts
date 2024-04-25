@@ -10,6 +10,7 @@ import { BookCopyService } from '../bookCopy.service';
 import { ReadBookCopyDto } from '../../dto/ReadBookCopyDto';
 import { CommonModule } from '@angular/common';
 import { DataSharingService } from '../data-sharing.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: '[app-reservation]',
@@ -24,6 +25,7 @@ export class ReservationComponent {
   book: ReadBookDto | null = null;
   user: ReadUserDto | null = null;
   role: string | null = null;
+  route: string | null = null;
 
   constructor(
     private bookService: BookService,
@@ -31,7 +33,8 @@ export class ReservationComponent {
     private loanService: LoanService,
     private bookCopyService: BookCopyService,
     private reservationService: ReservationService,
-    private dataSharingService: DataSharingService
+    private dataSharingService: DataSharingService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -43,7 +46,9 @@ export class ReservationComponent {
     // Get the role of the current user
     this.dataSharingService.userChangeObservable.subscribe(() => {
       this.role = localStorage.getItem('WT_ROLE');
-    })
+    });
+
+    this.route = this.router.url;
   }
 
   getBookById(id: number) {

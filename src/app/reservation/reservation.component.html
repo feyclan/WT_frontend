@@ -1,12 +1,8 @@
-<!-- Als ik op een user pagina zit, dan wil ik de naam niet laten zien-->
-<td *ngIf="isUserList"><a href="user/{{user?.id}}">{{user?.firstName}} {{user?.lastName}}</a></td>
+<td *ngIf="route === 'loans'"><a href="user/{{user?.id}}">{{user?.firstName}} {{user?.lastName}}</a></td>
 <td><a href="book/{{book?.id}}">{{book?.title}}</a></td>
 <td>{{reservation?.requestDate}}</td>
-<td>{{reservation?.reservationRequest}}</td>
-<td *ngIf="role === 'TRAINER'"><button [disabled]="reservation?.reservationRequest !== 'PENDING'" type="button" class="btn btn-success" (click)="acceptReservation()" (click)="reloadPage()">Goedkeuren</button></td>
-<td *ngIf="role === 'TRAINER'"><button [disabled]="reservation?.reservationRequest !== 'PENDING'" type="button" class="btn btn-danger" (click)="denyReservation()">Afwijzen</button></td>
-
-<!-- TODO: check of reservations ook goed gaat-->
-<!-- TODO: check of het goed gaat met de verschillende rollen-->
-<!-- TODO: trainer mag geen review button zien als die op de pagina van een user zit-->
-<!-- TODO: naam laten zien als je op de pagina van een user zit-->
+<td *ngIf="route !== 'loans'">{{reservation?.reservationRequest}}</td>
+<td *ngIf="role === 'TRAINER'"><button [disabled]="reservation?.reservationRequest !== 'PENDING'" type="button"
+        class="btn btn-success" (click)="acceptReservation()" (click)="reloadPage()">Goedkeuren</button></td>
+<td *ngIf="role === 'TRAINER'"><button [disabled]="reservation?.reservationRequest !== 'PENDING'" type="button"
+        class="btn btn-danger" (click)="denyReservation()">Afwijzen</button></td>
