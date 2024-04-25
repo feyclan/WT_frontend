@@ -7,4 +7,5 @@ export class ReadBookCopyDto {
     bookId?: number;
     available?: boolean;
     loanUserName?: string;
+    userLoanId?: number;
 }
