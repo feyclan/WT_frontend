@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { ReservationDto } from '../../dto/ReadReservationDto';
-import { ReservationService } from '../reservation.service';
 import { ReadBookDto } from '../../dto/ReadBookDto';
 import { BookService } from '../book.service';
 
