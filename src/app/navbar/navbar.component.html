@@ -20,7 +20,7 @@
           <a class="nav-link" routerLink="catalogue">Catalogus</a>
         </li>
         <li class="nav-item" *ngIf="!!role && role == 'TRAINER'">
-          <a class="nav-link" href="users">Gebruikers</a>
+          <a class="nav-link" routerLink="users">Gebruikers</a>
         </li>
         <li class="nav-item" *ngIf="!!role && role == 'TRAINER'">
           <a class="nav-link" routerLink="reservations">Reserveringen</a>
@@ -29,13 +29,13 @@
           <a class="nav-link" routerLink="loans">Leningen</a>
         </li>
         <li class="nav-item" *ngIf="!!role">
-          <a class="nav-link" style="cursor: pointer;" (click)="logout()">Uitloggen</a>
+          <a class="nav-link" id="logout" style="cursor: pointer;" (click)="logout()">Uitloggen</a>
         </li>
         <li class="nav-item" *ngIf="!role">
           <a class="nav-link" routerLink="login">Inloggen</a>
         </li>
       </ul>
     </div>
-    <span *ngIf="!!role"> {{name}} : {{role}}</span>
+    <span id="name" *ngIf="!!role"> {{name}} : {{role}}</span>
   </div>
 </nav>
