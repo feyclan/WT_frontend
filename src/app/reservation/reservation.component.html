@@ -1,7 +1,7 @@
-<td *ngIf="route !== '/loans'"><a href="user/{{user?.id}}">{{user?.firstName}} {{user?.lastName}}</a></td>
+<td *ngIf="route === '/reservations'"><a href="user/{{user?.id}}">{{user?.firstName}} {{user?.lastName}}</a></td>
 <td><a href="book/{{book?.id}}">{{book?.title}}</a></td>
 <td>{{reservation?.requestDate}}</td>
-<td *ngIf="route === '/loans'">{{reservation?.reservationRequest}}</td>
+<td *ngIf="route !== '/reservations'">{{reservation?.reservationRequest}}</td>
 <td *ngIf="role === 'TRAINER'"><button [disabled]="reservation?.reservationRequest !== 'PENDING'" type="button"
         class="btn btn-success" (click)="acceptReservation()" (click)="reloadPage()">Goedkeuren</button></td>
 <td *ngIf="role === 'TRAINER'"><button [disabled]="reservation?.reservationRequest !== 'PENDING'" type="button"
