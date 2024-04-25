@@ -2,5 +2,5 @@
 <td>{{bookCopy?.state}}</td>
 <td *ngIf="!bookCopy?.available">uitgeleend</td>
 <td *ngIf="bookCopy?.available">beschikbaar</td>
-<td *ngIf="!bookCopy?.available"><a href="user/{{bookCopy?.userLoanId}}">{{bookCopy?.loanUserName}}</a></td>
+<td *ngIf="!bookCopy?.available"><a class="nav-link" routerLink = "user/{{bookCopy?.userLoanId}}">{{bookCopy?.loanUserName}}</a></td>
 <td *ngIf="bookCopy?.available">kantoor</td>
