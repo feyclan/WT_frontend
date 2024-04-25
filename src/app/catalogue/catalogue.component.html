@@ -1,3 +1,4 @@
+<app-search-bar (searchEvent)="onSearch($event)" [placeholderText]="searchPlaceholder"></app-search-bar>
 
 <div class="card-deck w-75">
     @for (book of books; track book) {
@@ -13,7 +14,7 @@
           <span class="sr-only" style="cursor: pointer;">Vorige</span>
         </a>
       </li>
-      <li class="page-item" *ngFor="let page of totalPagesArray" [class.active]="page === currentPage">
+      <li class="page-item" *ngFor="let page of visiblePages" [class.active]="page === currentPage">
         <a class="page-link" (click)="setPage(page)" style="cursor: pointer;">{{ page }}</a>
       </li>
       <li class="page-item" [class.disabled]="currentPage === totalPages">

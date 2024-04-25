@@ -1,0 +1,28 @@
+/* Container for the search bar */
+.search-container {
+    max-width: 800px; /* Adjust the maximum width as needed */
+    margin: 0 auto; /* Center the search bar */
+  }
+  
+  /* Style the input field */
+  .search-input {
+    border-radius: 20px; /* Adjust the border radius as needed */
+    padding: 10px 15px; /* Adjust the padding as needed */
+    font-size: 16px; /* Adjust the font size as needed */
+    border: 1px solid #ced4da; /* Border color */
+  }
+  
+  /* Style the search button */
+  .search-button {
+    border-radius: 20px; /* Adjust the border radius as needed */
+    padding: 10px 20px; /* Adjust the padding as needed */
+    font-size: 16px; /* Adjust the font size as needed */
+    background-color: #007bff; /* Button background color */
+    color: #fff; /* Button text color */
+    border: 1px solid #007bff; /* Button border color */
+  }
+  
+  /* Hover effect for the search button */
+  .search-button:hover {
+    background-color: #0056b3; /* Hover background color */
+  }
