@@ -1,5 +1,6 @@
 <div>
-    <h1>Leenoverzicht</h1>
+    <h1 *ngIf="userId">Leenoverzicht van: {{user?.firstName}} {{user?.lastName}}</h1>
+    <h1 *ngIf="!userId">Mijn Leenoverzicht</h1>
     <h2>Aangevraagd</h2>
     <table class="table table-bordered">
         <thead>

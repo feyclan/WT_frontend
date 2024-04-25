@@ -1,19 +1,20 @@
 <div>
-    <h1>Lening Overzicht van {{user?.firstName}} {{user?.lastName}}</h1>
+    <h1 *ngIf="userId">Leenoverzicht van: {{user?.firstName}} {{user?.lastName}}</h1>
+    <h1 *ngIf="!userId">Leenoverzicht</h1>
     <h2>Aangevraagd</h2>
     <table class="table table-bordered">
         <thead>
             <tr>
                 <th scope="col">Boek Titel</th>
                 <th scope="col">Datum Aangevraagd</th>
-                <th scope="col">Goedkeuren</th>
-                <th scope="col">Afwijzen</th>
+                <th scope="col">Status</th>
+                <th *ngIf="role === 'TRAINER'" scope="col">Goedkeuren</th>
+                <th *ngIf="role === 'TRAINER'" scope="col">Afwijzen</th>
             </tr>
         </thead>
         <tbody>
             <ng-container *ngFor="let reservation of reservations">
-                <tr *ngIf="reservation.reservationRequest === 'PENDING'" app-reservation [reservation]="reservation"
-                    [isUserList]="true"></tr>
+                <tr app-reservation [reservation]="reservation"></tr>
             </ng-container>
         </tbody>
     </table>
@@ -24,11 +25,12 @@
             <tr>
                 <th scope="col">Boek Titel</th>
                 <th scope="col">Datum Geleend</th>
+                <th *ngIf="role === 'TRAINER'" scope="col">Innemen</th>
             </tr>
         </thead>
         <tbody>
             <ng-container *ngFor="let loan of loans">
-                <tr *ngIf="loan.isActive" app-loan [loan]="loan"></tr>
+                <tr *ngIf="loan.isActive" app-loan [loan]="loan" [trainerView]="true"></tr>
             </ng-container>
         </tbody>
     </table>
@@ -40,7 +42,6 @@
                 <th scope="col">Boek Titel</th>
                 <th scope="col">Datum Geleend</th>
                 <th scope="col">Datum Ingeleverd</th>
-                <th scope="col">Review Achterlaten</th>
             </tr>
         </thead>
         <tbody>
