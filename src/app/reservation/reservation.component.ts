@@ -8,26 +8,47 @@ import { LoanService } from '../loan.service';
 import { ReservationService } from '../reservation.service';
 import { BookCopyService } from '../bookCopy.service';
 import { ReadBookCopyDto } from '../../dto/ReadBookCopyDto';
+import { CommonModule } from '@angular/common';
+import { DataSharingService } from '../data-sharing.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: '[app-reservation]',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './reservation.component.html',
   styleUrl: './reservation.component.scss'
 })
 export class ReservationComponent {
   @Input() reservation: ReservationDto | null = null;
+  @Input() isUserList = false;
   book: ReadBookDto | null = null;
   user: ReadUserDto | null = null;
+  role: string | null = null;
+  route: string | null = null;
 
-  constructor(private bookService: BookService, private userService: UserService, private loanService: LoanService, private bookCopyService: BookCopyService, private reservationService: ReservationService) { }
+  constructor(
+    private bookService: BookService,
+    private userService: UserService,
+    private loanService: LoanService,
+    private bookCopyService: BookCopyService,
+    private reservationService: ReservationService,
+    private dataSharingService: DataSharingService,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
     if (this.reservation) {
       this.getBookById(this.reservation.bookId);
       this.getUserById(this.reservation.userId);
     }
+
+    // Get the role of the current user
+    this.dataSharingService.userChangeObservable.subscribe(() => {
+      this.role = localStorage.getItem('WT_ROLE');
+    });
+
+    this.route = this.router.url;
   }
 
   getBookById(id: number) {
