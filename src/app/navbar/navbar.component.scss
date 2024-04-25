@@ -1,0 +1,27 @@
+// .navbar {
+//     position: fixed;
+//     top: 0;
+//     left: 0;
+//     width: 100%;
+// }
+
+.nav-link {
+    font-family: euclid-bold;
+    color: black;
+}
+
+.nav-link:hover {
+    color: var(--grijs2);
+}
+
+.navbar-nav {
+    gap: 10px;
+}
+
+.uitloggen {
+    color: var(--grijs1);
+}
+
+.uitloggen:hover {
+    color: red;
+}
