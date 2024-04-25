@@ -6,7 +6,9 @@ import { UserListComponent } from './user-list/user-list.component';
 import { ReservationListComponent } from './reservation-list/reservation-list.component';
 import { LoginComponent } from './login/login.component';
 import { LoanListComponent } from './loan-list/loan-list.component';
+import { BookCopyListComponent } from './book-copy-list/book-copy-list.component';
 import { UserDetailsComponent } from './user-details/user-details.component';
+
 
 export const routes: Routes = [
     {path: 'book-form', component: BookFormComponent},
@@ -16,5 +18,6 @@ export const routes: Routes = [
     {path: 'user/:id', component: UserDetailsComponent},
     {path: 'reservations', component: ReservationListComponent},
     {path: 'loans', component: LoanListComponent},
-    {path: 'login', component: LoginComponent}
+    {path: 'login', component: LoginComponent},
+    {path: 'bookCopies/:id', component: BookCopyListComponent}
 ];
