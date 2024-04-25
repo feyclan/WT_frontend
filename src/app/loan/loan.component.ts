@@ -97,20 +97,21 @@ export class LoanComponent {
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
       if (result === 'save') {
 
-        if (this.loan) {
-          this.loan.conditionEnd = this.innemenForm.value.conditionEnd;
-          this.loan.endDate = new Date();
-          this.loan.isActive = false;
-
-          this.loanService.updateLoan(this.loan).subscribe(response => {
-            if (response.success) {
-              console.log('response', response);
-              alert("Boek ingenomen")
-            } else {
-              alert(response.errors);
-            }
-          });
+        const updateLoanData = {
+          id: this.loan?.id,
+          endDate: new Date(),
+          conditionEnd: this.innemenForm.value.conditionEnd,
+          isActive: false
         }
+
+        this.loanService.updateLoan(updateLoanData).subscribe(response => {
+          if (response.success) {
+            console.log('response', response);
+            alert("Boek ingenomen")
+          } else {
+            alert(response.errors);
+          }
+        });
       }
     }, (reason) => {
       console.log('Boek inneming geanulleerd:', reason);
