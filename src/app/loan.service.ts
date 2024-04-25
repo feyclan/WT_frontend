@@ -18,6 +18,10 @@ export class LoanService {
     return this.http.get<ResponseDto>("http://localhost:8080/loan/user/all")
   }
 
+  getLoansByUserId(id: number): Observable<ResponseDto> {
+    return this.http.get<ResponseDto>("http://localhost:8080/loan/user/" + id)
+  }
+
   getLoan(id: number): Observable<ResponseDto> {
     return this.http.get<ResponseDto>("http://localhost:8080/loan/" + id);
   }

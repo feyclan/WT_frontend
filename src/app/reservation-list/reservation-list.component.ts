@@ -34,7 +34,7 @@ export class ReservationListComponent {
   }
 
   loadLoans() {
-    this.loanService.getUserLoans().subscribe(resp => {
+    this.loanService.getLoans().subscribe(resp => {
       this.loans = resp.data;
     })
   }
