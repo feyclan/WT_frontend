@@ -49,7 +49,16 @@ export class LoginComponent {
         // Zeg tegen de data sharing service dat de user is veranderd
         this.dataSharingService.updateUser();
 
-        this.router.navigateByUrl('catalogue');
+        // Redirection based on TRAINEE/TRAINER role
+        switch(responseDto.data.role) {
+            case 'TRAINEE':
+                this.router.navigateByUrl('catalogue');
+                break;
+            case 'TRAINER':
+                this.router.navigateByUrl('#');
+                break;
+            //default:
+            }
       } else {
         alert('Onjuiste gegevens');
       }
