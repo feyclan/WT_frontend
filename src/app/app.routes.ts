@@ -1,13 +1,13 @@
 import { Routes } from '@angular/router';
-import { BookFormComponent } from './book-form/book-form.component';
-import { CatalogueComponent } from './catalogue/catalogue.component';
-import { BookDetailsComponent } from './book-details/book-details.component';
-import { UserListComponent } from './user-list/user-list.component';
-import { ReservationListComponent } from './reservation-list/reservation-list.component';
-import { LoginComponent } from './login/login.component';
-import { LoanListComponent } from './loan-list/loan-list.component';
-import { BookCopyListComponent } from './book-copy-list/book-copy-list.component';
-import { UserDetailsComponent } from './user-details/user-details.component';
+import { BookFormComponent } from './components/book-form/book-form.component';
+import { CatalogueComponent } from './components/catalogue/catalogue.component';
+import { BookDetailsComponent } from './components/book-details/book-details.component';
+import { UserListComponent } from './components/user-list/user-list.component';
+import { ReservationListComponent } from './components/reservation-list/reservation-list.component';
+import { LoginComponent } from './components/login/login.component';
+import { LoanListComponent } from './components/loan-list/loan-list.component';
+import { BookCopyListComponent } from './components/book-copy-list/book-copy-list.component';
+import { UserDetailsComponent } from './components/user-details/user-details.component';
 
 
 export const routes: Routes = [
