@@ -8,14 +8,20 @@ import { AddCopiesComponent } from '../add-copies/add-copies.component';
 import { SearchBarComponent } from '../search-bar/search-bar.component';
 
 @Component({
-  selector: 'app-catalogue',
+  selector: "app-catalogue",
   standalone: true,
-  imports: [NgFor, CommonModule, BookComponent, BookFormComponent, AddCopiesComponent, SearchBarComponent],
-  templateUrl: './catalogue.component.html',
-  styleUrl: './catalogue.component.scss'
+  imports: [
+    NgFor,
+    CommonModule,
+    BookComponent,
+    BookFormComponent,
+    AddCopiesComponent,
+    SearchBarComponent,
+  ],
+  templateUrl: "./catalogue.component.html",
+  styleUrl: "./catalogue.component.scss",
 })
 export class CatalogueComponent implements OnInit {
-
   books = new Array<ReadBookDto>();
   totalPages: number = 0;
   currentPage: number = 1;
@@ -28,28 +34,28 @@ export class CatalogueComponent implements OnInit {
     this.loadBooks(1);
   }
 
-
   loadBooks(pageNr: number) {
-
-      let dto = {
-        title: this.searchTerm,
-        pageNr: pageNr - 1
-      };
-      this.bookService.searchBooks(dto).subscribe((response) => {
-        this.books = response.data.books;
-        this.totalPages = response.data.totalPages;
-        this.currentPage = pageNr;
-      })     
+    let dto = {
+      authors: this.searchTerm,
+      title: this.searchTerm,
+      description: this.searchTerm,
+      pageNr: pageNr - 1,
+    };
+    this.bookService.searchBooks(dto).subscribe((response) => {
+      this.books = response.data.books;
+      this.totalPages = response.data.totalPages;
+      this.currentPage = pageNr;
+    });
   }
 
   hasCreatePermission() {
-    let role = localStorage.getItem('WT_ROLE');
+    let role = localStorage.getItem("WT_ROLE");
 
-    return !!role && role == 'TRAINER';
+    return !!role && role == "TRAINER";
   }
 
-  setPage(page: number){
-    if(page < 1 || page > this.totalPages){
+  setPage(page: number) {
+    if (page < 1 || page > this.totalPages) {
       return;
     }
 
@@ -58,9 +64,8 @@ export class CatalogueComponent implements OnInit {
     this.loadBooks(page);
   }
 
-
   get visiblePages(): number[] {
-    const totalPagesToShow = 5; 
+    const totalPagesToShow = 5;
     const startPage = Math.max(1, this.currentPage - 2);
     const endPage = Math.min(this.totalPages, startPage + totalPagesToShow - 1);
 
@@ -74,7 +79,5 @@ export class CatalogueComponent implements OnInit {
   onSearch(searchTerm: string) {
     this.searchTerm = searchTerm;
     this.loadBooks(1);
-
   }
-
 }
