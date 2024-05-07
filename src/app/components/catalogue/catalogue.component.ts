@@ -6,7 +6,6 @@ import { BookService } from "../../services/book.service";
 import { BookComponent } from "../book/book.component";
 import { AddCopiesComponent } from "../add-copies/add-copies.component";
 import { SearchBarComponent } from "../search-bar/search-bar.component";
-import { FilterSideBarComponent } from "../filter-side-bar/filter-side-bar.component";
 
 @Component({
   selector: "app-catalogue",
