@@ -1,11 +1,12 @@
-import { CommonModule, NgFor } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
-import { ReadBookDto } from '../../../dto/ReadBookDto';
-import { BookFormComponent } from '../book-form/book-form.component';
+import { CommonModule, NgFor } from "@angular/common";
+import { Component, OnInit } from "@angular/core";
+import { ReadBookDto } from "../../../dto/ReadBookDto";
+import { BookFormComponent } from "../book-form/book-form.component";
 import { BookService } from "../../services/book.service";
-import { BookComponent } from '../book/book.component';
-import { AddCopiesComponent } from '../add-copies/add-copies.component';
-import { SearchBarComponent } from '../search-bar/search-bar.component';
+import { BookComponent } from "../book/book.component";
+import { AddCopiesComponent } from "../add-copies/add-copies.component";
+import { SearchBarComponent } from "../search-bar/search-bar.component";
+import { FilterSideBarComponent } from "../filter-side-bar/filter-side-bar.component";
 
 @Component({
   selector: "app-catalogue",
@@ -23,6 +24,8 @@ import { SearchBarComponent } from '../search-bar/search-bar.component';
 })
 export class CatalogueComponent implements OnInit {
   books = new Array<ReadBookDto>();
+  uniqueCategories = new Set<string>();
+  uniqueAuthors = new Set<string>();
   totalPages: number = 0;
   currentPage: number = 1;
   searchTerm: string = "";
@@ -43,7 +46,31 @@ export class CatalogueComponent implements OnInit {
       this.books = response.data.books;
       this.totalPages = response.data.totalPages;
       this.currentPage = pageNr;
+
+      this.books.forEach((book) => {
+        if (book.categories) {
+          book.categories.forEach((category) => {
+            this.uniqueCategories.add(category);
+          });
+        }
+        if (book.authors) {
+          book.authors.forEach((author) => {
+            this.uniqueAuthors.add(author);
+          });
+        }
+      });
+
+      console.log(Array.from(this.uniqueCategories));
+      console.log(Array.from(this.uniqueAuthors));
     });
+  }
+
+  clearCategories() {
+    this.uniqueCategories.clear();
+  }
+
+  clearAuthors() {
+    this.uniqueAuthors.clear();
   }
 
   hasCreatePermission() {
@@ -76,6 +103,8 @@ export class CatalogueComponent implements OnInit {
 
   onSearch(searchTerm: string) {
     this.searchTerm = searchTerm;
+    this.clearCategories();
+    this.clearAuthors();
     this.loadBooks(1);
   }
 }
