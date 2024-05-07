@@ -110,7 +110,8 @@ export class ReservationComponent {
               }
             });
           }
-        } else {
+        }
+        else {
           alert("Geen boek kopieën beschikbaar")
         }
       })
@@ -125,10 +126,10 @@ export class ReservationComponent {
           if (response.success) {
             console.log('response', response);
             alert("Aanvraag afgewezen")
-          } else {
-            alert(response.errors)
           }
-        });
+      else {
+          alert(response.errors)
+          }});
       }
     }
   }

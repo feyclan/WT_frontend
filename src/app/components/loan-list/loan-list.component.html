@@ -8,11 +8,13 @@
                 <th scope="col">Boek Titel</th>
                 <th scope="col">Datum Aangevraagd</th>
                 <th scope="col">Status</th>
+                <th *ngIf="role === 'TRAINER'" scope="col">Goedkeuren</th>
+                <th *ngIf="role === 'TRAINER'" scope="col">Afwijzen</th>
             </tr>
         </thead>
         <tbody>
             <ng-container *ngFor="let reservation of reservations">
-                <tr app-reservation [reservation]="reservation"></tr>
+                <tr *ngIf="reservation.reservationRequest === 'PENDING'" app-reservation [reservation]="reservation"></tr>
             </ng-container>
         </tbody>
     </table>
