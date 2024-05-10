@@ -22,6 +22,7 @@ import { Router } from '@angular/router';
 export class ReservationComponent {
   @Input() reservation: ReservationDto | null = null;
   @Input() isUserList = false;
+  @Input() visibleButton = true;
   book: ReadBookDto | null = null;
   user: ReadUserDto | null = null;
   role: string | null = null;
