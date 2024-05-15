@@ -6,6 +6,7 @@ import { BookService } from "../../services/book.service";
 import { BookComponent } from "../book/book.component";
 import { AddCopiesComponent } from "../add-copies/add-copies.component";
 import { SearchBarComponent } from "../search-bar/search-bar.component";
+import { FormsModule } from "@angular/forms";
 
 @Component({
   selector: "app-catalogue",
@@ -13,15 +14,21 @@ import { SearchBarComponent } from "../search-bar/search-bar.component";
   imports: [
     NgFor,
     CommonModule,
+    AddCopiesComponent,
     BookComponent,
     BookFormComponent,
-    AddCopiesComponent,
     SearchBarComponent,
+    FormsModule,
   ],
   templateUrl: "./catalogue.component.html",
-  styleUrl: "./catalogue.component.scss",
+  styleUrls: ["./catalogue.component.scss"],
 })
 export class CatalogueComponent implements OnInit {
+  authorSelections: { [key: string]: boolean } = {};
+  categorySelections: { [key: string]: boolean } = {};
+  selectedAuthors = new Set<string>();
+  selectedCategories = new Set<string>();
+  filteredBooks = new Array<ReadBookDto>();
   books = new Array<ReadBookDto>();
   uniqueCategories = new Set<string>();
   uniqueAuthors = new Set<string>();
@@ -30,10 +37,43 @@ export class CatalogueComponent implements OnInit {
   searchTerm: string = "";
   searchPlaceholder: string = "Zoek op titel";
 
+  showMoreAuthors: boolean = false;
+  showMoreCategories: boolean = false;
+
   constructor(private bookService: BookService) {}
 
   ngOnInit(): void {
     this.loadBooks(1);
+  }
+
+  onAuthorToggle(author: string) {
+    if (this.authorSelections[author]) {
+      this.selectedAuthors.add(author);
+    } else {
+      this.selectedAuthors.delete(author);
+    }
+    this.applyFilters();
+  }
+
+  onCategoryToggle(category: string) {
+    if (this.categorySelections[category]) {
+      this.selectedCategories.add(category);
+    } else {
+      this.selectedCategories.delete(category);
+    }
+    this.applyFilters();
+  }
+
+  applyFilters() {
+    this.filteredBooks = this.books.filter(
+      (book) =>
+        (this.selectedAuthors.size === 0 ||
+          book.authors.some((author) => this.selectedAuthors.has(author))) &&
+        (this.selectedCategories.size === 0 ||
+          book.categories.some((category) =>
+            this.selectedCategories.has(category)
+          ))
+    );
   }
 
   loadBooks(pageNr: number) {
@@ -45,22 +85,27 @@ export class CatalogueComponent implements OnInit {
       this.books = response.data.books;
       this.totalPages = response.data.totalPages;
       this.currentPage = pageNr;
-
       this.books.forEach((book) => {
-        if (book.categories) {
-          book.categories.forEach((category) => {
-            this.uniqueCategories.add(category);
-          });
-        }
-        if (book.authors) {
-          book.authors.forEach((author) => {
-            this.uniqueAuthors.add(author);
-          });
-        }
+        book.categories.forEach((category) => {
+          this.uniqueCategories.add(category);
+          if (!(category in this.categorySelections)) {
+            this.categorySelections[category] = false;
+          }
+        });
+        book.authors.forEach((author) => {
+          this.uniqueAuthors.add(author);
+          if (!(author in this.authorSelections)) {
+            this.authorSelections[author] = false;
+          }
+        });
       });
 
-      console.log(Array.from(this.uniqueCategories));
-      console.log(Array.from(this.uniqueAuthors));
+      // Apply filters only if there are selected filters
+      if (this.selectedAuthors.size > 0 || this.selectedCategories.size > 0) {
+        this.applyFilters();
+      } else {
+        this.filteredBooks = this.books; // Default to show all books
+      }
     });
   }
 
@@ -74,7 +119,6 @@ export class CatalogueComponent implements OnInit {
 
   hasCreatePermission() {
     let role = localStorage.getItem("WT_ROLE");
-
     return !!role && role == "TRAINER";
   }
 
@@ -82,7 +126,6 @@ export class CatalogueComponent implements OnInit {
     if (page < 1 || page > this.totalPages) {
       return;
     }
-
     this.currentPage = page;
     console.log(this.currentPage);
     this.loadBooks(page);
@@ -92,12 +135,31 @@ export class CatalogueComponent implements OnInit {
     const totalPagesToShow = 5;
     const startPage = Math.max(1, this.currentPage - 2);
     const endPage = Math.min(this.totalPages, startPage + totalPagesToShow - 1);
-
     const pages = [];
     for (let i = startPage; i <= endPage; i++) {
       pages.push(i);
     }
     return pages;
+  }
+
+  get visibleAuthors(): string[] {
+    const authorsArray = Array.from(this.uniqueAuthors);
+    return this.showMoreAuthors ? authorsArray : authorsArray.slice(0, 5);
+  }
+
+  get visibleCategories(): string[] {
+    const categoriesArray = Array.from(this.uniqueCategories);
+    return this.showMoreCategories
+      ? categoriesArray
+      : categoriesArray.slice(0, 5);
+  }
+
+  toggleShowMoreAuthors() {
+    this.showMoreAuthors = !this.showMoreAuthors;
+  }
+
+  toggleShowMoreCategories() {
+    this.showMoreCategories = !this.showMoreCategories;
   }
 
   onSearch(searchTerm: string) {

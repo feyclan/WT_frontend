@@ -1,22 +1,77 @@
 .container-fluid {
+  padding: 0;
+  height: 100vh;
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
 }
 
-.sidebar {
-  background-color: #f8f9fa;
-  padding: 20px;
+.row {
+  flex-grow: 1;
+  overflow: hidden;
+}
+
+.col-md-1 {
+  width: 10%;
+  margin-top: 10px;
+}
+
+.col-md-10 {
+  height: 100%;
   overflow-y: auto;
-}
-
-.sidebar h3 {
-  font-weight: bold;
+  padding: 15px;
 }
 
 .card-deck {
-  max-width: 100%;
+  margin: 0 auto;
 }
 
 .pagination {
-  margin-top: 10px;
+  margin-top: 20px;
+  padding-bottom: 20px;
+}
+
+.page-link {
+  color: #007bff;
+  background-color: #fff;
+  border: 1px solid #dee2e6;
+  cursor: pointer;
+}
+
+.page-item.active .page-link {
+  color: #fff;
+  background-color: #007bff;
+  border-color: #007bff;
+}
+
+.page-item.disabled .page-link {
+  color: #6c757d;
+  pointer-events: none;
+}
+
+.offcanvas-body {
+  padding: 15px;
+}
+
+.offcanvas-body h3 {
+  margin-top: 20px;
+  margin-bottom: 15px;
+}
+
+.offcanvas-body .list-group-item {
+  padding: 10px 15px;
+}
+
+.form-check-input {
+  margin-right: 10px;
+}
+
+.uniform-button {
+  width: 50px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+  background-color: #00D000;
+  border-color: #00D000;
 }

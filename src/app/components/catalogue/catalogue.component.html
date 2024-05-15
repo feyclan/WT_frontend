@@ -1,47 +1,74 @@
 <div class="container-fluid">
   <div class="row">
-    <div class="col-md-3">
-      <div class="sidebar">
-        <h3>Authors</h3>
-        <ul>
-          <li *ngFor="let author of uniqueAuthors">{{ author }}</li>
-        </ul>
-        <h3>Categories</h3>
-        <ul>
-          <li *ngFor="let category of uniqueCategories">{{ category }}</li>
-        </ul>
+    <div class="col-md-1">
+      <div class="d-flex flex-column align-items-center">
+        <button class="btn btn-primary uniform-button" type="button" data-bs-toggle="offcanvas"
+          data-bs-target="#offcanvasSidebar" aria-controls="offcanvasSidebar">
+          ☰
+        </button>
+        <app-book-form *ngIf="hasCreatePermission()" (onSave)="loadBooks(currentPage)"
+          class="uniform-button"></app-book-form>
+      </div>
+      <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasSidebar"
+        aria-labelledby="offcanvasSidebarLabel">
+        <div class="offcanvas-header">
+          <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+          <h3>Authors</h3>
+          <ul class="list-group">
+            <li class="list-group-item" *ngFor="let author of visibleAuthors">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" [id]="author" [(ngModel)]="authorSelections[author]"
+                  (change)="onAuthorToggle(author)">
+                <label class="form-check-label" [for]="author">{{ author }}</label>
+              </div>
+            </li>
+          </ul>
+          <button class="btn btn-link" (click)="toggleShowMoreAuthors()">{{ showMoreAuthors ? 'Show less' : 'Show more'
+            }}</button>
+          <h3>Categories</h3>
+          <ul class="list-group">
+            <li class="list-group-item" *ngFor="let category of visibleCategories">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" [id]="category"
+                  [(ngModel)]="categorySelections[category]" (change)="onCategoryToggle(category)">
+                <label class="form-check-label" [for]="category">{{ category }}</label>
+              </div>
+            </li>
+          </ul>
+          <button class="btn btn-link" (click)="toggleShowMoreCategories()">{{ showMoreCategories ? 'Show less' : 'Show
+            more' }}</button>
+        </div>
       </div>
     </div>
-    <div class="col-md-9">
+    <div class="col-md-10">
       <app-search-bar class="searchBar" (searchEvent)="onSearch($event)"
         [placeholderText]="searchPlaceholder"></app-search-bar>
-      <div class="card-deck w-75">
-        <ng-container *ngFor="let book of books">
+      <div class="card-deck">
+        <ng-container *ngFor="let book of filteredBooks">
           <app-book (onDelete)="loadBooks(currentPage)" [book]="book"></app-book>
         </ng-container>
       </div>
       <div class="text-center mt-3 mt-sm-3">
         <ul class="pagination justify-content-center mb-0">
-          <ul class="pagination justify-content-center mb-0">
-            <li class="page-item" [class.disabled]="currentPage === 1">
-              <a class="page-link" (click)="setPage(currentPage - 1)" aria-label="Previous">
-                <span aria-hidden="true">&laquo;</span>
-                <span class="sr-only" style="cursor: pointer;">Vorige</span>
-              </a>
-            </li>
-            <li class="page-item" *ngFor="let page of visiblePages" [class.active]="page === currentPage">
-              <a class="page-link" (click)="setPage(page)" style="cursor: pointer;">{{ page }}</a>
-            </li>
-            <li class="page-item" [class.disabled]="currentPage === totalPages">
-              <a class="page-link" (click)="setPage(currentPage + 1)" aria-label="Next">
-                <span aria-hidden="true">&raquo;</span>
-                <span class="sr-only" style="cursor: pointer;">Volgende</span>
-              </a>
-            </li>
-          </ul>
+          <li class="page-item" [class.disabled]="currentPage === 1">
+            <a class="page-link" (click)="setPage(currentPage - 1)" aria-label="Previous">
+              <span aria-hidden="true">&laquo;</span>
+              <span class="sr-only" style="cursor: pointer;">Vorige</span>
+            </a>
+          </li>
+          <li class="page-item" *ngFor="let page of visiblePages" [class.active]="page === currentPage">
+            <a class="page-link" (click)="setPage(page)" style="cursor: pointer;">{{ page }}</a>
+          </li>
+          <li class="page-item" [class.disabled]="currentPage === totalPages">
+            <a class="page-link" (click)="setPage(currentPage + 1)" aria-label="Next">
+              <span aria-hidden="true">&raquo;</span>
+              <span class="sr-only" style="cursor: pointer;">Volgende</span>
+            </a>
+          </li>
         </ul>
       </div>
-      <app-book-form *ngIf="hasCreatePermission()" (onSave)="loadBooks(currentPage)"></app-book-form>
     </div>
   </div>
 </div>
