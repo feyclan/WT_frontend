@@ -7,6 +7,7 @@ import { BookComponent } from "../book/book.component";
 import { AddCopiesComponent } from "../add-copies/add-copies.component";
 import { SearchBarComponent } from "../search-bar/search-bar.component";
 import { FormsModule } from "@angular/forms";
+import { AuthorService } from "../../author.service";
 
 @Component({
   selector: "app-catalogue",
@@ -41,7 +42,7 @@ export class CatalogueComponent implements OnInit {
   showMoreAuthors: boolean = false;
   showMoreCategories: boolean = false;
 
-  constructor(private bookService: BookService) {}
+  constructor(private bookService: BookService, private authorService: AuthorService) {}
 
   ngOnInit(): void {
     this.loadBooks(1);
@@ -88,6 +89,11 @@ export class CatalogueComponent implements OnInit {
       this.totalPages = response.data.totalPages;
       this.currentPage = pageNr;
 
+      this.authorService.searchKeyword(dto).subscribe( authorResponse => {
+        // lijst van authors gaan vullen
+        this.uniqueAuthors = authorResponse.data.authors;
+      })
+
       this.books.forEach((book) => {
         book.categories.forEach((category) => {
           this.uniqueCategories.add(category);
@@ -96,12 +102,12 @@ export class CatalogueComponent implements OnInit {
           }
         });
 
-        book.authors.forEach((author) => {
-          this.uniqueAuthors.add(author);
-          if (!(author in this.authorSelections)) {
-            this.authorSelections[author] = false;
-          }
-        });
+        // book.authors.forEach((author) => {
+        //   this.uniqueAuthors.add(author);
+        //   if (!(author in this.authorSelections)) {
+        //     this.authorSelections[author] = false;
+        //   }
+        // });
       });
 
       if (this.selectedAuthors.size > 0 || this.selectedCategories.size > 0) {
