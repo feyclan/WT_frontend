@@ -35,7 +35,8 @@ export class CatalogueComponent implements OnInit {
   totalPages: number = 0;
   currentPage: number = 1;
   searchTerm: string = "";
-  searchPlaceholder: string = "Zoek op titel";
+  searchPlaceholder: string =
+    "Zoek op titel, auteur, categorie of beschrijving...";
 
   showMoreAuthors: boolean = false;
   showMoreCategories: boolean = false;
@@ -81,10 +82,12 @@ export class CatalogueComponent implements OnInit {
       searchTerm: this.searchTerm,
       pageNr: pageNr - 1,
     };
+
     this.bookService.searchBooks(dto).subscribe((response) => {
       this.books = response.data.books;
       this.totalPages = response.data.totalPages;
       this.currentPage = pageNr;
+
       this.books.forEach((book) => {
         book.categories.forEach((category) => {
           this.uniqueCategories.add(category);
@@ -92,6 +95,7 @@ export class CatalogueComponent implements OnInit {
             this.categorySelections[category] = false;
           }
         });
+
         book.authors.forEach((author) => {
           this.uniqueAuthors.add(author);
           if (!(author in this.authorSelections)) {
@@ -100,11 +104,10 @@ export class CatalogueComponent implements OnInit {
         });
       });
 
-      // Apply filters only if there are selected filters
       if (this.selectedAuthors.size > 0 || this.selectedCategories.size > 0) {
         this.applyFilters();
       } else {
-        this.filteredBooks = this.books; // Default to show all books
+        this.filteredBooks = this.books;
       }
     });
   }

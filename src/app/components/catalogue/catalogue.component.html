@@ -6,8 +6,7 @@
           data-bs-target="#offcanvasSidebar" aria-controls="offcanvasSidebar">
           ☰
         </button>
-        <app-book-form *ngIf="hasCreatePermission()" (onSave)="loadBooks(currentPage)"
-          class="uniform-button"></app-book-form>
+        <app-book-form *ngIf="hasCreatePermission()" (onSave)="loadBooks(currentPage)"></app-book-form>
       </div>
       <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasSidebar"
         aria-labelledby="offcanvasSidebarLabel">
