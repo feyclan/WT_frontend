@@ -33,6 +33,7 @@ export class CatalogueComponent implements OnInit {
 
       let dto = {
         title: this.searchTerm,
+        //author: this.searchAuthor,
         pageNr: pageNr - 1
       };
       this.bookService.searchBooks(dto).subscribe((response) => {

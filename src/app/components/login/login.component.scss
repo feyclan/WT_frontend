@@ -1,10 +1,28 @@
+body {
+  background-image: url("/src/assets/imgs/office.webp");
+  background-size: 100% auto;
+  background-position: center;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+
+.login-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
 .loginBox {
-    width: 30%;
-    margin: auto;
-    margin-top: 100px;
-    border-style:solid;
-    border-width: 1px;
-    border-radius: 5px;
-    border-color: black;
-    padding: 20px;
+  width: 120%;
+  margin: auto;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 5px;
+  border-color: black;
+  padding: 20px;
+  background-color: white;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
