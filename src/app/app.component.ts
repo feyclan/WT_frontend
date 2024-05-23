@@ -11,6 +11,7 @@ import { ReservationComponent } from './components/reservation/reservation.compo
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
 import { BookCopyListComponent } from './components/book-copy-list/book-copy-list.component';
 import { BookCopyDetailsComponent } from './components/book-copy-details/book-copy-details.component';
+import { DataShareStandaloneComponent } from './components/data-share-standalone/data-share-standalone.component';
 
 @Component({
   selector: 'app-root',
@@ -27,7 +28,8 @@ import { BookCopyDetailsComponent } from './components/book-copy-details/book-co
     ReservationComponent,
     SearchBarComponent,
     BookCopyListComponent,
-    BookCopyDetailsComponent
+    BookCopyDetailsComponent,
+    DataShareStandaloneComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'

@@ -1,9 +1,77 @@
-#outer {
-    border-style: solid;
-    border-width: 1px;
-    border-radius: 5px;
+.container-fluid {
+  padding: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.row {
+  flex-grow: 1;
+  overflow: hidden;
+}
+
+.col-md-1 {
+  width: 10%;
+  margin-top: 10px;
+}
+
+.col-md-10 {
+  height: 100%;
+  overflow-y: auto;
+  padding: 15px;
 }
 
 .card-deck {
-    margin: 50px 50px 0px 0px;
+  margin: 0 auto;
+}
+
+.pagination {
+  margin-top: 20px;
+  padding-bottom: 20px;
+}
+
+.page-link {
+  color: #007bff;
+  background-color: #fff;
+  border: 1px solid #dee2e6;
+  cursor: pointer;
+}
+
+.page-item.active .page-link {
+  color: #fff;
+  background-color: #007bff;
+  border-color: #007bff;
+}
+
+.page-item.disabled .page-link {
+  color: #6c757d;
+  pointer-events: none;
+}
+
+.offcanvas-body {
+  padding: 15px;
+}
+
+.offcanvas-body h3 {
+  margin-top: 20px;
+  margin-bottom: 15px;
+}
+
+.offcanvas-body .list-group-item {
+  padding: 10px 15px;
+}
+
+.form-check-input {
+  margin-right: 10px;
+}
+
+.uniform-button {
+  width: 50px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+  background-color: #00D000;
+  border-color: #00D000;
 }

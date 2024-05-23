@@ -8,8 +8,8 @@ import { CreateBookDto } from '../../dto/CreateBookDto';
 @Injectable({
   providedIn: 'root'
 })
-export class BookService {
 
+export class BookService {
   constructor(private http: HttpClient) {}
 
   getBooks(pageNr: number): Observable<ResponseDto> {
