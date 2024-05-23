@@ -78,45 +78,46 @@ export class CatalogueComponent implements OnInit {
     );
   }
 
-  loadBooks(pageNr: number) {
+loadBooks(pageNr: number) {
     let dto = {
-      searchTerm: this.searchTerm,
-      pageNr: pageNr - 1,
+        searchTerm: this.searchTerm,
+        pageNr: pageNr - 1,
     };
 
     this.bookService.searchBooks(dto).subscribe((response) => {
-      this.books = response.data.books;
-      this.totalPages = response.data.totalPages;
-      this.currentPage = pageNr;
+        this.books = response.data.books;
+        this.totalPages = response.data.totalPages;
+        this.currentPage = pageNr;
 
-      this.authorService.searchKeyword(dto).subscribe( authorResponse => {
-        // lijst van authors gaan vullen
-        this.uniqueAuthors = authorResponse.data.authors;
-      })
-
-      this.books.forEach((book) => {
-        book.categories.forEach((category) => {
-          this.uniqueCategories.add(category);
-          if (!(category in this.categorySelections)) {
-            this.categorySelections[category] = false;
-          }
+        this.books.forEach((book) => {
+            book.categories.forEach((category) => {
+                this.uniqueCategories.add(category);
+                if (!(category in this.categorySelections)) {
+                    this.categorySelections[category] = false;
+                }
+            });
         });
 
-        // book.authors.forEach((author) => {
-        //   this.uniqueAuthors.add(author);
-        //   if (!(author in this.authorSelections)) {
-        //     this.authorSelections[author] = false;
-        //   }
-        // });
-      });
+        // Fetch authors and map them
+        this.authorService.searchKeyword(dto).subscribe(authorResponse => {
+            this.uniqueAuthors.clear(); // Clear previous authors
+            authorResponse.forEach((author) => {
+                this.uniqueAuthors.add(author.name);
+                if (!(author.name in this.authorSelections)) {
+                    this.authorSelections[author.name] = false;
+                }
+            });
 
-      if (this.selectedAuthors.size > 0 || this.selectedCategories.size > 0) {
-        this.applyFilters();
-      } else {
-        this.filteredBooks = this.books;
-      }
+            // Apply filters if any are selected
+            if (this.selectedAuthors.size > 0 || this.selectedCategories.size > 0) {
+                this.applyFilters();
+            } else {
+                this.filteredBooks = this.books;
+            }
+        });
     });
-  }
+}
+
 
   clearCategories() {
     this.uniqueCategories.clear();
