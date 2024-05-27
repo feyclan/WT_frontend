@@ -1,4 +1,4 @@
-import { Component, Input, output } from '@angular/core';
+import { Component, Input, output, forwardRef } from '@angular/core';
 import { ReadBookDto } from '../../../dto/ReadBookDto';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -9,7 +9,7 @@ import { AddCopiesComponent } from '../add-copies/add-copies.component';
 @Component({
   selector: 'app-book',
   standalone: true,
-  imports: [CommonModule, CatalogueComponent, AddCopiesComponent],
+  imports: [CommonModule, forwardRef(() => CatalogueComponent), AddCopiesComponent],
   templateUrl: './book.component.html',
   styleUrl: './book.component.scss'
 })
