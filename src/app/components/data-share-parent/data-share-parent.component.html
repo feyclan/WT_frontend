@@ -1,0 +1,8 @@
+<p>Dit is de parent component</p>
+<button class="btn btn-primary" (click)="changeName()">
+    Change name
+</button>
+<span>Number from child is {{number}}</span>
+
+<app-data-share-child (onClick)="showNumber($event)" [argName]="name"></app-data-share-child>
+

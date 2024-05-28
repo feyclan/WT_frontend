@@ -8,6 +8,7 @@ import { LoginComponent } from './components/login/login.component';
 import { LoanListComponent } from './components/loan-list/loan-list.component';
 import { BookCopyListComponent } from './components/book-copy-list/book-copy-list.component';
 import { UserDetailsComponent } from './components/user-details/user-details.component';
+import { DataShareParentComponent } from './components/data-share-parent/data-share-parent.component';
 
 
 export const routes: Routes = [
@@ -19,5 +20,6 @@ export const routes: Routes = [
     {path: 'reservations', component: ReservationListComponent},
     {path: 'loans', component: LoanListComponent},
     {path: 'login', component: LoginComponent},
-    {path: 'bookCopies/:id', component: BookCopyListComponent}
+    {path: 'bookCopies/:id', component: BookCopyListComponent},
+    {path: 'share1', component: DataShareParentComponent}
 ];

@@ -1,8 +1,6 @@
 <div class="card flex-row">
   <img *ngIf="book?.imageLink; else defaultImage" class="card-img-left example-card-img-responsive"
-    [src]="book?.imageLink" 
-    alt="Image of {{book?.title}}"
-    />
+    [src]="book?.imageLink" alt="Image of {{book?.title}}" />
 
   <div class="card-body">
     <button id="title" class="card-title h5 h4-sm" (click)="gotoBookDetailPage(book)">
