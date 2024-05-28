@@ -4,3 +4,11 @@
 <td *ngIf="bookCopy?.available">beschikbaar</td>
 <td *ngIf="!bookCopy?.available"><a href="user/{{bookCopy?.userLoanId}}">{{bookCopy?.loanUserName}}</a></td>
 <td *ngIf="bookCopy?.available">kantoor</td>
+<td>
+    <ng-select id="userDropdown" class="form-select" *ngIf="bookCopy?.available" [(ngModel)]="userId" typeToSearchText="yes" appendTo="body">
+        <ng-option>Kies een gebruiker</ng-option>
+        <ng-option *ngFor="let user of users" [value]="user.id">{{user.firstName}} {{user.lastName}}</ng-option>
+    </ng-select>
+</td>
+<td><button class="btn btn-success" *ngIf="bookCopy?.available" type="button" (click)="makeReservation()">toewijzen</button></td> 
+

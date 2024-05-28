@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, ViewChild, forwardRef } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { BookCopyService } from "../../services/bookCopy.service";
@@ -10,7 +10,7 @@ import { CatalogueComponent } from '../catalogue/catalogue.component';
 @Component({
   selector: 'app-add-copies',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, BookComponent, CatalogueComponent],
+  imports: [CommonModule, ReactiveFormsModule, forwardRef(() => BookComponent), forwardRef(() => CatalogueComponent)],
   templateUrl: './add-copies.component.html',
   styleUrl: './add-copies.component.scss'
 })

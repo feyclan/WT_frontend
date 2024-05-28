@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { BookCopyListComponent } from './book-copy-list.component';
+import { RouterModule } from '@angular/router';
 
 describe('BookCopyListComponent', () => {
   let component: BookCopyListComponent;
@@ -8,7 +9,7 @@ describe('BookCopyListComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [BookCopyListComponent]
+      imports: [BookCopyListComponent, HttpClientTestingModule, RouterModule.forRoot([])]
     })
     .compileComponents();
     

@@ -1,7 +1,8 @@
-import { CommonModule, NgFor } from "@angular/common";
-import { Component, OnInit } from "@angular/core";
-import { ReadBookDto } from "../../../dto/ReadBookDto";
-import { BookFormComponent } from "../book-form/book-form.component";
+import { CommonModule, NgFor } from '@angular/common';
+import { Component, OnInit, forwardRef } from '@angular/core';
+import { ReadBookDto } from '../../../dto/ReadBookDto';
+import { BookFormComponent } from '../book-form/book-form.component';
+
 import { BookService } from "../../services/book.service";
 import { BookComponent } from "../book/book.component";
 import { AddCopiesComponent } from "../add-copies/add-copies.component";

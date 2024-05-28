@@ -5,11 +5,12 @@
             <th scope="col">Conditie</th>
             <th scope="col">Beschikbaarheid</th>
             <th scope="col">Locatie</th>
+            <th scope="col"></th>
         </tr>
     </thead>
     <tbody>
         <ng-container *ngFor="let bookCopy of bookCopies">
-            <tr app-book-copy-details [bookCopy]="bookCopy"></tr>
+            <tr app-book-copy-details [bookCopy]="bookCopy"></tr>        
         </ng-container>
     </tbody>
 </table>

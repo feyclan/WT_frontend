@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { LoanListComponent } from './loan-list.component';
+import { RouterModule } from '@angular/router';
 
 describe('LoanListComponent', () => {
   let component: LoanListComponent;
@@ -8,7 +9,7 @@ describe('LoanListComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [LoanListComponent]
+      imports: [LoanListComponent, HttpClientTestingModule, RouterModule.forRoot([])]
     })
     .compileComponents();
     
